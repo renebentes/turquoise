@@ -1,0 +1,33 @@
+CHANGELOG
+=============
+
+Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
+
+* 1.0.4 - 26/08/2014
+  * Updated - Adequação de arquivos index.php, component.php, error.php e offline.php
+  * Updated - Refatoração do arquivo helper.php
+  * Updated - Renomeado arquivo config.php para helper.php do template
+* 1.0.3 -
+  * Updated - jQuery 1.11.1
+  * Updated - html5shiv 1.7.2
+  * Updated - Bootstrap 3.2.0
+  * Added - Arquivo de licença
+* 1.0.2 -
+  * Fixed - Variável print não definida em component.php
+  * Added - Parâmetro para exibição ou não de informações de direitos autorais de ferramentas utilizadas
+  * Updated - Arquivo component.php
+  * Updated - Arquivo error.php
+  * Added - Parâmetro para desativar JS e CSS relacionados
+  * Fixed - Organização do arquivo index.php
+  * Added - Arquivo offline.php
+  * Added - Tradução para o inglês
+  * Updated - Atualização jQuery 1.11
+  * Updated - Atualização Bootstrap 3.1.1
+  * Added - Inclusão de parâmetro para texto alternativo do logo
+  * Added - Inclusão de visões para componentes core do Joomla
+  * Updated - Migração de Bootstrap 2.3.2 para Bootstrap 3.0.0
+* 1.0.1 -
+  * Added - Layouts para vários módulos core do Joomla
+  * Added - Sobrescrita de paginação
+* 1.0.0 - 04/09/2013
+  * Message - Estágio inicial de desenvolvimento

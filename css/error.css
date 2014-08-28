@@ -1,0 +1,22 @@
+h2 {
+	font-size: 300px;
+	line-height: 280px;
+	text-transform: inherit;
+	color: #0088cc;
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media (max-width: 767px) {
+	h2 {
+		font-size: 200px;
+		line-height: 180px;
+	}
+}
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media (max-width: 480px) {
+	h2 {
+		font-size: 140px;
+		line-height: 140px;
+	}
+}
