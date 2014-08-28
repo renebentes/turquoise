@@ -14,8 +14,8 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 
-<section class="blog-featured<?php echo $this->pageclass_sfx; ?>">
-<?php if ($this->params->get('show_page_heading')) : ?>
+<section class="blog-featured<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Blog">
+<?php if ($this->params->get('show_page_heading') != 0) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
   </div>
@@ -24,7 +24,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 <?php $leadingcount = 0; ?>
 <?php if (!empty($this->lead_items)) : ?>
   <?php foreach ($this->lead_items as &$item) : ?>
-  <div class="row<?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
+  <div class="row<?php echo $item->state == 0 ? ' system-unpublished' : null; ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="col-md-12">
     <?php $this->item = &$item;
       echo $this->loadTemplate('item'); ?>
