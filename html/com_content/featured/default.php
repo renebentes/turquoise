@@ -14,22 +14,19 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 
-<section class="blog-featured<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Blog">
+<section class="blog-featured<?php echo $this->pageclass_sfx; ?>">
 <?php if ($this->params->get('show_page_heading') != 0) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
   </div>
 <?php endif; ?>
 
-<?php $leadingcount = 0; ?>
-<?php if (!empty($this->lead_items)) : ?>
-  <?php foreach ($this->lead_items as &$item) : ?>
-  <div class="row<?php echo $item->state == 0 ? ' system-unpublished' : null; ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="col-md-12">
-    <?php $this->item = &$item;
-      echo $this->loadTemplate('item'); ?>
-    </div>
-  </div>
+<?php $leadingcount = 0;
+if (!empty($this->lead_items)) :
+  foreach ($this->lead_items as &$item) :
+    $this->item = &$item;
+    echo $this->loadTemplate('item'); ?>
+
   <hr class="half-rule">
     <?php $leadingcount++;
   endforeach;
@@ -65,14 +62,14 @@ endif; ?>
 </section>
 
 <?php if (!empty($this->link_items)) : ?>
-<section class="items-more">
+<div class="items-more">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><?php echo JText::_('COM_CONTENT_MORE_ARTICLES'); ?></h3>
     </div>
     <?php echo $this->loadTemplate('links'); ?>
   </div>
-</section>
+</div>
 <?php endif;
 
 if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) :
