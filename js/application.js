@@ -1,6 +1,4 @@
-if (typeof jQuery === 'undefined') {
-  throw new Error('Requires jQuery');
-}
+if (typeof jQuery === 'undefined') throw new Error('Javascript requires jQuery!');
 
 jQuery.noConflict();
 
@@ -39,17 +37,31 @@ jQuery.noConflict();
 
     // Call Remote in Modal
     $('.modal-remote').click(function () {
-      var target = $(this).data('target');
-      var url = $(this).attr('href');
+      var url    = $(this).attr('href');
+      var title  = $(this).data('title') === 'undefined' ? $(this).data('title') : $(this).data('original-title');
+      var dialog = '<div class="modal fade" id="modal-remote" tabindex="-1" role="dialog" aria-labelledby="modalRemote" aria-hidden="true">' +
+        '<div class="modal-dialog">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<button type="button" class="close" data-dismiss="modal">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '<span class="sr-only">Close</span>' +
+        '</button>'+
+        '</div>' +
+        '<div class="modal-body">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+      $('div').remove('#modal-remote');
+      $('body').append(dialog);
 
-      if (target === 'undefined') {
-        target = "#modal-remote";
+      if (title !== 'undefined' && title !== '') {
+        $('#modal-remote .modal-content .modal-header').append('<h4>' + $(this).data('title') + '</h4>');
       }
-      if ($(this).data('title') !== 'undefined') {
-        $(target + ' .modal-content .modal-header').append('<h4>' + $(this).data('title') + '</h4>');
-      }
-      $(target + ' .modal-content .modal-body').html('<iframe src="' + url + '" frameborder="0"></iframe>');
-      $(target).modal({
+
+      $('#modal-remote .modal-content .modal-body').html('<iframe src="' + url + '" frameborder="0"></iframe>');
+      $('#modal-remote').modal({
         backdrop: 'static',
         keyboard: false,
         show: true

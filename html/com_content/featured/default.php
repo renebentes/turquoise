@@ -14,7 +14,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 
-<section class="blog-featured<?php echo $this->pageclass_sfx; ?>">
+<div class="blog-featured<?php echo $this->pageclass_sfx; ?>">
 <?php if ($this->params->get('show_page_heading') != 0) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
@@ -39,27 +39,23 @@ if (!empty($this->intro_items)) :
   foreach ($this->intro_items as $key => &$item) :
     $key = ($key - $leadingcount) + 1;
     $rowcount = (((int) $key - 1) % (int) $this->columns) + 1;
-    $row = $counter / $this->columns;
+    $row = $counter / $this->columns; ?>
 
-    if ($rowcount == 1) : ?>
-    <div class="row">
-    <?php endif; ?>
-      <div class="col-md-<?php echo round(12/$this->columns); ?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
-      <?php $this->item = &$item;
-        echo $this->loadTemplate('item');
-      ?>
-      </div>
+    <div class="col-md-<?php echo round(12/$this->columns); ?>">
+    <?php $this->item = &$item;
+      echo $this->loadTemplate('item');
+    ?>
+    </div>
 
     <?php $counter++;
 
     if (($rowcount == $this->columns) or ($counter == $introcount)) : ?>
-    </div>
     <hr class="half-rule">
     <?php endif;
 
   endforeach;
 endif; ?>
-</section>
+</div>
 
 <?php if (!empty($this->link_items)) : ?>
 <div class="items-more">

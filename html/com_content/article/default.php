@@ -107,39 +107,12 @@ endif; ?>
       </dl>
     <?php endif; ?>
 
-    <?php if($this->print) : ?>
-      <div class="btn-group pull-right hidden-print">
-        <?php echo JHtml::_('icon.print_screen', $this->item, $params); ?>
-      </div>
-    <?php else : ?>
-      <?php if ($params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit) : ?>
-      <div class="btn-group pull-right">
-        <?php if ($params->get('show_print_icon')) :
-          echo JHtml::_('icon.print_popup', $this->item, $params);
-        endif;
-        if ($params->get('show_email_icon')) :
-          echo JHtml::_('icon.email', $this->item, $params);
-        endif;
-        if ($canEdit) :
-          echo JHtml::_('icon.edit', $this->item, $params);
-        endif; ?>
-      </div>
-      <?php endif; ?>
-    <?php endif; ?>
+    <?php if ($canEdit || $params->get('show_print_icon') || $params->get('show_email_icon')) :
+      echo JLayoutHelper::render('joomla.content.icons', array('params' => $params, 'item' => $this->item, 'print' => false));
+    endif; ?>
     </aside>
 
-    <?php if(!$this->print) :
-      if ($params->get('show_print_icon') || $params->get('show_email_icon')) :
-        if ($params->get('show_print_icon')) :
-          echo JHtml::_('icon.addModal', 'modal-print', 'JGLOBAL_PRINT', 'PrintArticle');
-        endif;
-        if ($params->get('show_email_icon')) :
-          JFactory::getLanguage()->load('com_mailto', JPATH_SITE);
-          echo JHtml::_('icon.addModal', 'modal-email', 'COM_MAILTO_EMAIL_TO_A_FRIEND', 'SendMail', 'COM_MAILTO_CLOSE_WINDOW');
-        endif;
-      endif;
-    endif;
-  endif; ?>
+  <?php endif; ?>
 
   <?php if (!$params->get('show_intro')) : ?>
     <?php echo $this->item->event->afterDisplayTitle; ?>

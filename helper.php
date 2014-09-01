@@ -80,7 +80,7 @@ abstract class tplTurquoiseHelper
   static public function getLogo($template)
   {
     if ($template->params->get('logo')) :
-      $logo = $template->params->get('logo');
+      $logo = $template->baseurl . '/' . $template->params->get('logo');
     else :
       $logo = $template->path . '/images/logo.png';
     endif;
@@ -117,7 +117,6 @@ abstract class tplTurquoiseHelper
       $filejs = $template->params->get('filejs', '');
 
       unset($scripts[$template->baseurl . '/media/system/js/mootools-core.js']);
-      unset($scripts[$template->baseurl . '/media/system/js/core.js']);
       unset($scripts[$template->baseurl . '/media/system/js/caption.js']);
 
 

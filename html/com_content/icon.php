@@ -82,8 +82,6 @@ class JHtmlIcon
       $attribs['class'] = 'modal-remote';
     }
 
-    $attribs['data-target'] = '#modal-email';
-
     $output = JHtml::_('link', JRoute::_($url), $text, $attribs);
     return $output;
   }
@@ -159,13 +157,14 @@ class JHtmlIcon
    */
   public static function print_popup($item, $params, $attribs = array())
   {
-    $url = ContentHelperRoute::getArticleRoute($item->slug, $item->catid);
-    $url .= '&tmpl=component&print=1&layout=default&page=' . @ $request->limitstart;
+    $request = JFactory::getApplication()->input->request;
+    $url     = ContentHelperRoute::getArticleRoute($item->slug, $item->catid);
+    $url     .= '&tmpl=component&print=1&layout=default&page=' . @ $request->limitstart;
 
     // checks template image directory for image, if non found default are loaded
     if ($params->get('show_icons'))
     {
-      $text                           = '<i class="glyphicon glyphicon-print"></i> ';
+      $text                           = '<i class="glyphicon glyphicon-print"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip modal-remote';
       $attribs['data-original-title'] = JText::_('JGLOBAL_PRINT');
     }
@@ -174,8 +173,6 @@ class JHtmlIcon
       $text             = JText::_('JGLOBAL_PRINT');
       $attribs['class'] = 'modal-remote';
     }
-
-    $attribs['data-target'] = "#modal-print";
 
     return JHtml::_('link', JRoute::_($url), $text, $attribs);
   }
@@ -197,7 +194,7 @@ class JHtmlIcon
     // checks template image directory for image, if non found default are loaded
     if ($params->get('show_icons'))
     {
-      $text = '<i class="glyphicon glyphicon-print"></i> ';
+      $text                           = '<i class="glyphicon glyphicon-print"></i>';
       $attribs['rel']                 = 'tooltip';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
       $attribs['data-original-title'] = JText::_('JGLOBAL_PRINT');
@@ -210,34 +207,6 @@ class JHtmlIcon
     $attribs['onclick'] = "window.print();return false;";
 
     return JHtml::_('link', '#', $text, $attribs);
-  }
-
-  /**
-   * Add html structure for modal displays
-   *
-   * @param string $target  Target for insert content modal
-   * @param string $title   Title for modal
-   * @param string $label   Label for accessible modals
-   * @param string $tooltip Tooltip hint for button close
-   *
-   * @return string The HTML for the modal structure
-   * @since 2.5
-   */
-  public static function addModal($target = 'modal-remote', $title = '', $label = 'modalRemote', $tooltip = 'TPL_TURQUOISE_CLOSE')
-  {
-    $output   = array();
-    $output[] = '<div class="modal fade" id="' . $target . '" tabindex="-1" role="dialog" aria-labelledby="' . $label . '" aria-hidden="true">';
-    $output[] = '  <div class="modal-dialog">';
-    $output[] = '    <div class="modal-content">';
-    $output[] = '      <div class="modal-header">';
-    $output[] = '        <button type="button" class="close hasTooltip" data-original-title="' . JText::_($tooltip) . '" data-dismiss="modal" aria-hidden="true" data-placement="left">&times;</button>';
-    $output[] = '        <h4 class="modal-title" id="' . $label . '">' . JText::_($title) . '</h4>';
-    $output[] = '      </div>';
-    $output[] = '      <div class="modal-body"></div>';
-    $output[] = '    </div>';
-    $output[] = '  </div>';
-    $output[] = '</div>';
-    return implode("\n", $output);
   }
 
   /**

@@ -102,8 +102,10 @@ endif;
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
           <?php $module = JModuleHelper::getModule('search');
-          $module->position = '';
-          echo JModuleHelper::renderModule($module); ?>
+          if(isset($module->position)) {
+            $module->position = $module->position == 'search' ? 'error' : $module->position;
+            echo JModuleHelper::renderModule($module);
+          } ?>
 
           <ul class="nav nav-pills nav-justified">
             <li><a href="<?php echo JUri::root(); ?>"><i class="glyphicon glyphicon-home"></i> <?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></li>
