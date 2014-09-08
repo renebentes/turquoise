@@ -264,24 +264,12 @@ function modChrome_column($module, &$params, &$attribs)
   $modules[] = $temp;
 
   if ($counterModules == 1 ) :
-    $counter = 0;
-    $soma    = 0;
-    foreach ($modules as $renderModule) :
+    $counter = 0; ?>
+    <div class="row">
+    <?php foreach ($modules as $renderModule) :
       $counter++;
-      if ($counter == 1) : ?>
-        <div class="row">
-      <?php endif;
-
-      $moduleclass_sfx = explode(' ', $renderModule->params['moduleclass_sfx']);
-      foreach ($moduleclass_sfx as $key) :
-        if (is_numeric($key)) :
-          $soma = $soma + $key;
-        else :
-          $soma = $soma + 3;
-        endif;
-      endforeach;
       if (!empty($renderModule->content)) : ?>
-        <div class="<?php echo $renderModule->name; ?> col-md-<?php echo $renderModule->params['moduleclass_sfx'] ? htmlspecialchars($renderModule->params['moduleclass_sfx']) : '3'; ?>">
+        <div class="<?php echo $renderModule->name; ?><?php echo $renderModule->params['moduleclass_sfx'] ? ' ' . htmlspecialchars($renderModule->params['moduleclass_sfx']) : 'col-md-3'; ?>">
         <?php if ($renderModule->showtitle != 0) : ?>
           <div class="page-header">
             <h4><?php echo $renderModule->title; ?></h4>
@@ -290,20 +278,9 @@ function modChrome_column($module, &$params, &$attribs)
           <?php echo $renderModule->content; ?>
         </div>
       <?php endif;
-      if ($soma >= 12) :
-        $soma = 0; ?>
-        </div>
-        <?php if ($counter < count($modules)) : ?>
-          <div class="row">
-        <?php endif;
-      else :
-        if ($counter == count($modules)) : ?>
-          </div>
-        <?php endif;
-      endif;
-
-    endforeach;
-    $counterModules--;
+    endforeach; ?>
+    </div>
+    <?php $counterModules--;
   else :
     $counterModules--;
   endif;

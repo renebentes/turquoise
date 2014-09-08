@@ -38,7 +38,7 @@ jQuery.noConflict();
     // Call Remote in Modal
     $('.modal-remote').click(function () {
       var url    = $(this).attr('href');
-      var title  = $(this).data('title') === 'undefined' ? $(this).data('title') : $(this).data('original-title');
+      var title  = $(this).data('title') === 'undefined' ? $(this).data('originalTitle') : $(this).data('title');
       var dialog = '<div class="modal fade" id="modal-remote" tabindex="-1" role="dialog" aria-labelledby="modalRemote" aria-hidden="true">' +
         '<div class="modal-dialog">' +
         '<div class="modal-content">' +

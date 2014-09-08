@@ -120,11 +120,11 @@ endif;
     </main>
   <?php if ($this->countModules('footermenu') || $this->countModules('footer') || $this->countModules('copyright')) : ?>
     <footer class="wrap-footer">
+    <?php if ($this->countModules('footer')) : ?>
       <div class="container">
-      <?php if ($this->countModules('footer')) : ?>
         <jdoc:include type="modules" name="footer" style="column" />
-      <?php endif; ?>
       </div>
+    <?php endif; ?>
     <?php if ($this->countModules('copyright')) : ?>
       <div class="footer-bottom">
         <div class="container">

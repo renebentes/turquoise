@@ -679,16 +679,13 @@ form + table {
 }
 
 .footer-bottom {
+  overflow: hidden;
+  padding-top: 15px;
   border-top: 1px solid #444;
   border-top: 1px solid rgba(0,0,0,.1);
   background-color: #3a3a3a;
   background-color: rgba(0,0,0,.3);
   font-size: 12px;
-}
-
-.footer-bottom  p,
-.footer-bottom address {
-  margin: 10px 0;
 }
 
 .scroll-top {

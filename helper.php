@@ -47,7 +47,7 @@ abstract class tplTurquoiseHelper
   {
     if ($template->params->get('load') == 'remote') :
       JFactory::getDocument()->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
-      JFactory::getDocument()->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+      JFactory::getDocument()->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
       JFactory::getDocument()->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
       JFactory::getDocument()->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
