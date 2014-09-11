@@ -105,11 +105,7 @@ endif;
         <?php if (tplTurquoiseHelper::isFrontpage() && $this->countModules('featured')) : ?>
           <jdoc:include type="modules" name="featured" style="featured" />
         <?php endif; ?>
-          <div class="row">
-            <div class="col-md-12">
-              <jdoc:include type="component" />
-            </div>
-          </div>
+          <jdoc:include type="component" />
         </div>
       <?php if ($this->countModules('right')) : ?>
         <div class="col-md-3">
