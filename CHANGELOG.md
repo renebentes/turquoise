@@ -4,6 +4,8 @@ CHANGELOG
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
 * 1.0.4 - 26/08/2014
+  * Updated - com_content featured - category
+  * Added - com_cck
   * Updated - FontAwesome 4.2.0
   * Updated - Adequação de arquivos index.php, component.php, error.php e offline.php
   * Updated - Refatoração do arquivo helper.php

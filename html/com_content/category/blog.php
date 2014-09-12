@@ -15,12 +15,12 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 ?>
 
 <section class="blog<?php echo $this->pageclass_sfx; ?>">
-<?php if ($this->params->get('show_page_heading') or $this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
+<?php if ($this->params->get('show_page_heading') || $this->params->get('show_category_title', 1) || $this->params->get('page_subheading')) : ?>
   <div class="page-header">
   <?php if ($this->params->get('show_page_heading')) : ?>
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
   <?php endif; ?>
-  <?php if ($this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
+  <?php if ($this->params->get('show_category_title', 1) || $this->params->get('page_subheading')) : ?>
     <h2><?php echo $this->escape($this->params->get('page_subheading'));
     if ($this->params->get('show_category_title')) : ?>
       <small><?php echo $this->category->title; ?></small>
@@ -29,7 +29,13 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
   <?php endif; ?>
   </div>
 <?php endif; ?>
-<?php if (($this->params->get('show_description_image') && $this->category->getParams()->get('image')) || ($this->params->get('show_description') && $this->category->description)) : ?>
+
+<?php if ($this->params->get('show_cat_tags', 1) && !empty($this->category->tags->itemTags)) :
+  $this->category->tagLayout = new JLayoutFile('joomla.content.tags');
+  echo $this->category->tagLayout->render($this->category->tags->itemTags);
+endif; ?>
+
+<?php if ($this->params->get('show_description') || $this->params->get('show_description_image')) : ?>
   <div class="well well-sm clearfix">
   <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
     <img class="img-responsive" src="<?php echo $this->category->getParams()->get('image'); ?>"/>
@@ -49,53 +55,44 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 <?php endif; ?>
 
 <?php $leadingcount = 0; ?>
-<?php if (!empty($this->lead_items)) : ?>
-  <?php foreach ($this->lead_items as &$item) : ?>
-  <div class="row<?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
-    <div class="col-md-12">
-    <?php
-      $this->item = &$item;
-      echo $this->loadTemplate('item');
-    ?>
-    </div>
+<?php if (!empty($this->lead_items)) :
+  foreach ($this->lead_items as &$item) : ?>
+  <div class="row">
+    <?php $this->item = &$item;
+    echo $this->loadTemplate('item'); ?>
   </div>
   <hr class="half-rule">
   <?php
     $leadingcount++;
   ?>
-  <?php endforeach; ?>
-<?php endif; ?>
-<?php
-  $introcount = (count($this->intro_items));
-  $counter = 0;
-?>
-<?php if (!empty($this->intro_items)) : ?>
-  <?php foreach ($this->intro_items as $key => &$item) : ?>
+  <?php endforeach;
+endif;
 
-    <?php
-    $key = ($key - $leadingcount) + 1;
-    $rowcount = (((int) $key - 1) % (int) $this->columns) + 1;
-    $row = $counter / $this->columns;
+$introcount = (count($this->intro_items));
+$counter    = 0;
 
-    if ($rowcount == 1) : ?>
+if (!empty($this->intro_items)) :
+  foreach ($this->intro_items as $key => &$item) :
+    $rowcount = ((int) $key % (int) $this->columns) + 1;
+    if ($rowcount == 1) :
+      $row = $counter / $this->columns; ?>
     <div class="row">
     <?php endif; ?>
-      <div class="col-md-<?php echo round(12/$this->columns); ?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
+      <div class="col-md-<?php echo round(12/$this->columns); ?>">
       <?php
-          $this->item = &$item;
-          echo $this->loadTemplate('item');
+        $this->item = &$item;
+        echo $this->loadTemplate('item');
       ?>
       </div>
       <?php $counter++; ?>
 
       <?php if (($rowcount == $this->columns) or ($counter == $introcount)) : ?>
-
     </div>
     <hr class="half-rule">
     <?php endif; ?>
-
   <?php endforeach; ?>
 <?php endif; ?>
+
 </section>
 
 <?php if (!empty($this->link_items)) : ?>

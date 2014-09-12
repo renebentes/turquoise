@@ -10,18 +10,20 @@
 defined('_JEXEC') || die;
 
 // Create a shortcut for params.
-$params  = &$this->item->params;
-$images  = json_decode($this->item->images);
-$canEdit = $this->item->params->get('access-edit');
-$info    = $this->item->params->get('info_block_position', 0);
+$params     = &$this->item->params;
+$images     = json_decode($this->item->images);
+$canEdit    = $this->item->params->get('access-edit');
+$info       = $this->item->params->get('info_block_position', 0);
+$useDefList = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $this->params->get('show_tags', 1);
+$showIcons  = $params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit;
 ?>
 
 <article>
 <?php if ($params->get('show_title')) : ?>
   <header class="page-header">
-    <h2>
+    <h2 itemprop="name">
     <?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
-      <a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>">
+      <a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>" itemprop="url">
         <?php echo $this->escape($this->item->title); ?>
       </a>
     <?php else : ?>
@@ -40,79 +42,95 @@ $info    = $this->item->params->get('info_block_position', 0);
   </header>
 <?php endif; ?>
 
-<?php if ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_create_date') || $params->get('show_parent_category') || $params->get('show_author') || $params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit) : ?>
+<?php if (($useDefList && ($info == 0 || $info == 2)) || $showIcons) : ?>
   <aside class="clearfix">
-  <?php if ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_create_date') || $params->get('show_parent_category') || $params->get('show_author')) : ?>
-    <dl class="dl-inline pull-left">
-    <?php if ($params->get('show_publish_date')) : ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PUBLISH_DATE'); ?>">
-        <time datetime="<?php echo JHtml::_('date', $this->item->publish_up, 'Y-m-d'); ?>"></time>
-        <i class="fa fa-calendar"></i> <?php echo JHtml::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')); ?>
-    <?php endif; ?>
-    <?php if ($params->get('show_create_date')) : ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
-        <time datetime="<?php echo JHtml::_('date', $this->item->created, 'Y-m-d'); ?>"></time>
-        <i class="fa fa-calendar"></i> <?php echo JHtml::_('date', $this->item->created, JText::_('DATE_FORMAT_LC3')); ?>
-      </dd>
-    <?php endif; ?>
-    <?php if ($params->get('show_modify_date')) : ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_UPDATE_DATE'); ?>">
-        <time datetime="<?php echo JHtml::_('date', $this->item->modified, 'Y-m-d'); ?>"></time>
-        <i class="fa fa-calendar"></i> <?php echo JHtml::_('date', $this->item->modified, JText::sprintf('DATE_FORMAT_LC3')); ?>
-      </dd>
-    <?php endif; ?>
-    <?php if ($params->get('show_hits')) : ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
-        <i class="fa fa-eye"></i> <?php echo $this->item->hits; ?>
-      </dd>
-    <?php endif; ?>
-    <?php if ($params->get('show_parent_category') && $this->item->parent_slug != '1:root' && $this->item->parent_slug) : ?>
-      <?php $title = $this->escape($this->item->parent_title);
-      $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)) . '">' . $title . '</a>'; ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PARENT_CATEGORY'); ?>">
-        <i class="fa fa-tags"></i>
-      <?php if ($params->get('link_parent_category') && $this->item->parent_slug) : ?>
-        <?php echo $url; ?>
-      <?php else : ?>
-        <?php echo $title;?>
-      <?php endif; ?>
-      </dd>
-    <?php endif; ?>
-    <?php if ($params->get('show_category')) : ?>
-      <?php $title = $this->escape($this->item->category_title);
-      $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)) . '">' . $title . '</a>';?>
-      <dd class=" hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
-        <i class="fa fa-tag"></i>
-      <?php if ($params->get('link_category') && $this->item->catslug) : ?>
-        <?php echo $url; ?>
-      <?php else : ?>
-        <?php echo $title; ?>
-      <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($params->get('show_author') && !empty($this->item->author )) : ?>
-      <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>">
-        <i class="fa fa-user"></i>
-        <?php $author =  $this->item->author; ?>
-        <?php $author = ($this->item->created_by_alias ? $this->item->created_by_alias : $author);?>
-
-      <?php if (!empty($this->item->contactid ) &&  $params->get('link_author') == true):?>
-        <?php echo JHtml::_('link', JRoute::_('index.php?option=com_contact&view=contact&id=' . $this->item->contactid), $author); ?>
-      <?php else :?>
-        <?php echo $author; ?>
-      <?php endif; ?>
-      </dd>
-    <?php endif; ?>
-    </dl>
-  <?php endif; ?>
-
-  <?php if ($canEdit || $params->get('show_print_icon') || $params->get('show_email_icon')) :
+  <?php if ($showIcons) :
     echo JLayoutHelper::render('joomla.content.icons', array('params' => $params, 'item' => $this->item, 'print' => false));
   endif; ?>
+
+  <?php if ($useDefList && ($info == 0 || $info == 2)) : ?>
+    <ul class="article-details pull-left">
+    <?php if ($params->get('show_author') && !empty($this->item->author)) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="fa fa-user"></span>
+        <?php $author = '<span itempro="name">' . $this->item->created_by_alias ? $this->item->created_by_alias : $this->item->author . '</span>'; ?>
+
+      <?php if (!empty($this->item->contact_link) &&  $params->get('link_author')) : ?>
+        <?php echo JHtml::_('link', $this->item->contact_link, $author, array('itemprop' => 'url')); ?>
+      <?php else : ?>
+        <?php echo $author; ?>
+      <?php endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_parent_category') && !empty($this->item->parent_slug)) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PARENT_CATEGORY'); ?>">
+        <span class="fa fa-tags"></span>
+      <?php $title = $this->escape($this->item->parent_title);
+      if ($params->get('link_parent_category') && !empty($this->item->parent_slug)) :
+        $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)) . '" itemprop="genre">' . $title . '</a>';
+        echo $url;
+      else :
+        echo '<span itemprop="genre">' . $title . '</span>';
+      endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_category')) : ?>
+      <li class=" hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
+        <span class="fa fa-tag"></span>
+        <?php $title = $this->escape($this->item->category_title);
+      if ($params->get('link_category') && $this->item->catslug) :
+        $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)) . '" itemprop="genre">' . $title . '</a>';
+        echo $url;
+      else :
+        echo '<span itemprop="genre">' . $title . '</span>';
+      endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_publish_date')) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PUBLISH_DATE'); ?>">
+        <span class="fa fa-calendar"></span>
+        <time datetime="<?php echo JHtml::_('date', $this->item->publish_up, 'c'); ?>" itemprop="datePublished">
+          <?php echo JHtml::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')); ?>
+        </time>
+    <?php endif; ?>
+    <?php if($info == 0) : ?>
+      <?php if ($params->get('show_modify_date')) : ?>
+        <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_UPDATE_DATE'); ?>">
+          <span class="fa fa-calendar"></span>
+          <time datetime="<?php echo JHtml::_('date', $this->item->modified, 'c'); ?>" itemprop="dateModified">
+            <?php echo JHtml::_('date', $this->item->modified, JText::sprintf('DATE_FORMAT_LC3')); ?>
+          </time>
+        </li>
+      <?php endif; ?>
+      <?php if ($params->get('show_create_date')) : ?>
+        <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
+          <span class="fa fa-calendar"></span>
+          <time datetime="<?php echo JHtml::_('date', $this->item->created, 'c'); ?>" itemprop="dateCreated">
+            <?php echo JHtml::_('date', $this->item->created, JText::_('DATE_FORMAT_LC3')); ?>
+          </time>
+        </li>
+      <?php endif; ?>
+      <?php if ($params->get('show_hits')) : ?>
+        <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
+          <meta itemprop="interactionCount" content="UserPageVisits:<?php echo $this->item->hits; ?>" />
+          <span class="fa fa-eye"></span><?php echo $this->item->hits; ?>
+        </li>
+      <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($this->params->get('show_tags', 1)) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_TAGS'); ?>">
+        <?php $this->item->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+        <?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
+      </li>
+    <?php endif; ?>
+    </ul>
+  <?php endif; ?>
+
   </aside>
 <?php endif; ?>
 
 <?php if (isset($images->image_intro) && !empty($images->image_intro)) : ?>
-<?php $imgfloat = (empty($images->float_intro)) ? $params->get('float_intro') : $images->float_intro; ?>
+<?php $imgfloat = empty($images->float_intro) ? $params->get('float_intro') : $images->float_intro; ?>
   <figure class="thumbnail<?php echo $imgfloat != 'none' ? ' col-md-5 pull-' . htmlspecialchars($imgfloat) : ' col-md-6 col-md-offset-3'; ?>">
     <img class="img-responsive" src="<?php echo htmlspecialchars($images->image_intro); ?>"<?php echo $images->image_intro_caption ? ' title="' . htmlspecialchars($images->image_intro_caption) . '"' : null; ?> alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>"/>
   <?php if ($images->image_intro_caption) : ?>
@@ -134,37 +152,99 @@ $info    = $this->item->params->get('info_block_position', 0);
   </div>
 <?php endif; ?>
 
+<?php if ($useDefList && ($info == 1 ||  $info == 2)) : ?>
+  <ul class="article-details pull-left">
+  <?php if ($info == 1) : ?>
+    <?php if ($params->get('show_author') && !empty($this->item->author)) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>">
+        <span class="fa fa-user"></span>
+        <?php $author = $this->item->created_by_alias ? $this->item->created_by_alias : $this->item->author; ?>
+
+      <?php if (!empty($this->item->contactid ) &&  $params->get('link_author') == true):?>
+        <?php echo JHtml::_('link', JRoute::_('index.php?option=com_contact&view=contact&id=' . $this->item->contactid), $author); ?>
+      <?php else :?>
+        <?php echo $author; ?>
+      <?php endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_parent_category') && !empty($this->item->parent_slug)) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PARENT_CATEGORY'); ?>">
+        <span class="fa fa-tags"></span>
+      <?php $title = $this->escape($this->item->parent_title);
+      if ($params->get('link_parent_category') && !empty($this->item->parent_slug)) :
+        $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)) . '">' . $title . '</a>';
+        echo $url;
+      else :
+        echo $title;
+      endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_category')) : ?>
+      <li class=" hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
+        <span class="fa fa-tag"></span>
+        <?php $title = $this->escape($this->item->category_title);
+      if ($params->get('link_category') && $this->item->catslug) :
+        $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)) . '">' . $title . '</a>';
+        echo $url;
+      else :
+        echo $title;
+      endif; ?>
+      </li>
+    <?php endif; ?>
+    <?php if ($params->get('show_publish_date')) : ?>
+      <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PUBLISH_DATE'); ?>">
+        <span class="fa fa-calendar"></span>
+        <time datetime="<?php echo JHtml::_('date', $this->item->publish_up, 'c'); ?>">
+          <?php echo JHtml::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')); ?>
+        </time>
+    <?php endif; ?>
+  <?php endif; ?>
+
+  <?php if ($params->get('show_modify_date')) : ?>
+    <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_UPDATE_DATE'); ?>">
+      <span class="fa fa-calendar"></span>
+      <time datetime="<?php echo JHtml::_('date', $this->item->modified, 'c'); ?>">
+        <?php echo JHtml::_('date', $this->item->modified, JText::sprintf('DATE_FORMAT_LC3')); ?>
+      </time>
+    </li>
+  <?php endif; ?>
+  <?php if ($params->get('show_create_date')) : ?>
+    <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
+      <span class="fa fa-calendar"></span>
+      <time datetime="<?php echo JHtml::_('date', $this->item->created, 'c'); ?>">
+        <?php echo JHtml::_('date', $this->item->created, JText::_('DATE_FORMAT_LC3')); ?>
+      </time>
+    </li>
+  <?php endif; ?>
+  <?php if ($params->get('show_hits')) : ?>
+    <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
+      <span class="fa fa-eye"></span><?php echo $this->item->hits; ?>
+    </li>
+  <?php endif; ?>
+  <?php if ($this->params->get('show_tags', 1)) : ?>
+    <li class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_TAGS'); ?>">
+      <?php $this->item->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+      <?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
+    </li>
+  <?php endif; ?>
+  </ul>
+<?php endif;?>
+
 <?php if ($params->get('show_readmore') && $this->item->readmore) :
   if ($params->get('access-view')) :
     $link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
   else :
-    $menu = JFactory::getApplication()->getMenu();
-    $active = $menu->getActive();
-    $itemId = $active->id;
-    $link1 = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
+    $menu      = JFactory::getApplication()->getMenu();
+    $active    = $menu->getActive();
+    $itemId    = $active->id;
+    $link1     = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
     $returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
-    $link = new JURI($link1);
+    $link      = new JUri($link1);
     $link->setVar('return', base64_encode($returnURL));
   endif; ?>
 
-  <div class="readmore">
-    <a class="pull-left" href="<?php echo $link; ?>">
-      <i class="fa fa-arrow-circle-right"></i>
-    <?php if (!$params->get('access-view')) :
-      echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
-    elseif ($readmore = $this->item->alternative_readmore) :
-      echo $readmore;
-      if ($params->get('show_readmore_title', 0) != 0) :
-        echo JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
-      endif;
-    elseif ($params->get('show_readmore_title', 0) == 0) :
-      echo JText::sprintf('COM_CONTENT_READ_MORE_TITLE');
-    else :
-      echo JText::_('COM_CONTENT_READ_MORE');
-      echo JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'));
-    endif; ?>
-    </a>
-  </div>
+  <?php echo JLayoutHelper::render('joomla.content.readmore', array('item' => $this->item, 'params' => $params, 'link' => $link)); ?>
+
 <?php endif; ?>
 </article>
 

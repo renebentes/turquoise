@@ -31,12 +31,12 @@ if ( count( $this->items ) && $location ) {
 	if ( $pkbs ) {
 		$pkbs	=	substr( $pkbs, 0, -1 );
 	}
-	
+
 	JCck::callFunc_Array( 'plgCCK_Storage_Location'.$location, 'onCCK_Storage_LocationPrepareList', array( &$params ) );
 	$path	=	JPATH_PLUGINS.'/cck_storage_location/'.$location.'/tmpl/item.php';
-	
+
 	foreach ( $this->items as $item ) {
-		include $path;	
+		include $path;
 	}
 } else {
 	echo $this->data;

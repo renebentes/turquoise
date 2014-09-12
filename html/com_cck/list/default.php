@@ -54,33 +54,33 @@ $app = JFactory::getApplication();
 
 if ($this->show_list_desc == 1 && $this->description != '') : ?>
 	<div class="well well-sm">
-		<?php echo ($this->raw_rendering) ? JHtml::_( 'content.prepare', $this->description ) : JHtml::_( 'content.prepare', $this->description ); ?>
+		<?php echo JHtml::_( 'content.prepare', $this->description ); ?>
 	</div>
 <?php endif;
-echo $this->config['action'] ? $this->config['action'] : '<form action="' . ($this->home ? JUri::base(true) : JRoute::_('index.php?option=' . $this->option)). '" autocomplete="off" method="get" id="seblod_form" name="seblod_form" role="form">';
+
+	echo $this->config['action'] ? $this->config['action'] : '<form action="' . ($this->home ? JUri::base(true) : JRoute::_('index.php?option=' . $this->option)). '" autocomplete="off" method="get" id="seblod_form" name="seblod_form" role="form">';
+
 if ($this->show_form == 1)
 {
-	echo $this->raw_rendering ? $this->form : '<div class="cck_page_search' . $this->pageclass_sfx . ' cck-clrfix">' . $this->form . '</div><div class="clr"></div>';
-}/*
-?>
-<?php if ( !$this->raw_rendering ) { ?>
-<div>
-<?php } ?>
-<input type="hidden" name="boxchecked" value="0" />
-<?php if ( !JFactory::getApplication()->getCfg( 'sef' ) || !$this->config['Itemid'] ) { ?>
-<input type="hidden" name="option" value="com_cck" />
-<input type="hidden" name="view" value="list" />
-<?php if ( $this->home === false ) { ?>
-<input type="hidden" name="Itemid" value="<?php echo $app->input->getInt( 'Itemid', 0 ); ?>" />
-<?php } }
-$tmpl	=	$app->input->get( 'tmpl', '' );
-if ( $tmpl ) { ?>
-<input type="hidden" name="tmpl" value="<?php echo $tmpl; ?>" />
-<?php } ?>
-<input type="hidden" name="search" value="<?php echo $this->search->name; ?>" />
-<input type="hidden" name="task" value="search" />
-<?php if ( !$this->raw_rendering ) { ?>
-</div>
+	echo $this->form;
+} ?>
+
+		<input type="hidden" name="boxchecked" value="0" />
+	<?php if (!JFactory::getApplication()->getCfg('sef') || !$this->config['Itemid']) : ?>
+		<input type="hidden" name="option" value="com_cck" />
+		<input type="hidden" name="view" value="list" />
+		<?php if ( $this->home === false ) : ?>
+		<input type="hidden" name="Itemid" value="<?php echo $app->input->getInt( 'Itemid', 0 ); ?>" />
+		<?php endif;
+	endif;
+
+	$tmpl	=	$app->input->get('tmpl', '');
+	if ($tmpl) : ?>
+		<input type="hidden" name="tmpl" value="<?php echo $tmpl; ?>" />
+	<?php endif; ?>
+		<input type="hidden" name="search" value="<?php echo $this->search->name; ?>" />
+		<input type="hidden" name="task" value="search" />
+<?php /* ?>
 <div class="cck_page_list<?php echo $this->pageclass_sfx; ?> cck-clrfix" id="system">
 <?php } ?>
 	<?php
@@ -104,14 +104,16 @@ if ( $tmpl ) { ?>
 				}
 			}
 		}
-	}
-	if ( $this->show_items_number ) {
-		$label	=	$this->label_items_number;
-		if ( $this->config['doTranslation'] ) {
-			$label	=	JText::_( 'COM_CCK_' . str_replace( ' ', '_', trim( $label ) ) );
+	}*/
+	if ($this->show_items_number)
+	{
+		$label = $this->label_items_number;
+		if ($this->config['doTranslation'])
+		{
+			$label = JText::_( 'COM_CCK_' . str_replace(' ', '_', strtoupper(trim($label))));
 		}
-		echo '<div class="'.$this->class_items_number.'"><span>' . $this->total .'</span> '. $label . '</div>';
-	}
+		echo '<div class="' . $this->class_items_number . '"><span>' . $this->total . '</span> ' . $label . '</div>';
+	}/*
 	if ( ( $this->show_pagination == -1 || $this->show_pagination == 1 ) && $pages_total > 1 ) {
 		echo '<div class="'.$this->class_pagination.'">' . ( ( $pagination_replace != '' ) ? str_replace( '?', '?'.$pagination_replace, $this->pagination->getPagesLinks() ) : $this->pagination->getPagesLinks() ) . '</div>';
 	}
@@ -139,12 +141,12 @@ if ( $tmpl ) { ?>
 if ( $this->show_form == 2 ) {
 	echo ( $this->raw_rendering ) ? $this->form : '<div class="clr"></div><div class="cck_page_search'.$this->pageclass_sfx.'">' . $this->form . '</div>';
 }
-?>
-</form>*/
+*/?>
+</form>
 
-if ( $this->show_list_desc == 2 && $this->description != '' ) : ?>
+<?php if ( $this->show_list_desc == 2 && $this->description != '' ) : ?>
 	<div class="well well-sm">
-		<?php echo ($this->raw_rendering) ? JHtml::_( 'content.prepare', $this->description ) : JHtml::_( 'content.prepare', $this->description ); ?>
+		<?php echo JHtml::_( 'content.prepare', $this->description ); ?>
 	</div>
 <?php endif; ?>
 </div>

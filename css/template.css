@@ -492,29 +492,26 @@ form > br + .form-group {
   margin-top: 15px;
 }
 
-.dl-inline {
+.article-details {
   margin: 0;
   padding: 0;
-  width: 85%;
+  list-style: none;;
 }
 
-.col-md-6 .dl-inline {
-  width: 80%;
+.article-details > li {
+  display: inline-block;
+  border-right: 1px solid #000;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
-.dl-inline dt {
-  float: left;
-  clear: left;
-  overflow: hidden;
-  text-align: right;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.article-details > li:first-child {
+  padding-left: 0;
 }
 
-.dl-inline dd {
-  float: left;
-  margin-right: 10px;
-  white-space: nowrap;
+.article-details > li:last-child {
+  border-right: 0;
+  padding-right: 0;
 }
 
 .icon-box {

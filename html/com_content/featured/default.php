@@ -14,7 +14,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 
-<div class="blog-featured<?php echo $this->pageclass_sfx; ?>">
+<section class="blog-featured<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Blog">
 <?php if ($this->params->get('show_page_heading') != 0) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
@@ -23,10 +23,13 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 <?php $leadingcount = 0;
 if (!empty($this->lead_items)) :
-  foreach ($this->lead_items as &$item) :
-    $this->item = &$item;
-    echo $this->loadTemplate('item'); ?>
-
+  foreach ($this->lead_items as &$item) : ?>
+  <div class="row" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="col-md-12">
+      <?php $this->item = &$item;
+      echo $this->loadTemplate('item'); ?>
+      </div>
+  </div>
   <hr class="half-rule">
     <?php $leadingcount++;
   endforeach;
@@ -37,9 +40,11 @@ $counter = 0;
 
 if (!empty($this->intro_items)) :
   foreach ($this->intro_items as $key => &$item) :
-    $key = ($key - $leadingcount) + 1;
-    $rowcount = (((int) $key - 1) % (int) $this->columns) + 1;
-    $row = $counter / $this->columns; ?>
+    $rowcount = ((int) $key - $leadingcount) % (int) $this->columns + 1;
+
+    if ($rowcount == 1) : ?>
+  <div class="row" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <?php endif; ?>
 
     <div class="col-md-<?php echo round(12/$this->columns); ?>">
     <?php $this->item = &$item;
@@ -50,22 +55,23 @@ if (!empty($this->intro_items)) :
     <?php $counter++;
 
     if (($rowcount == $this->columns) or ($counter == $introcount)) : ?>
-    <hr class="half-rule">
+  </div>
+  <hr class="half-rule">
     <?php endif;
 
   endforeach;
 endif; ?>
-</div>
+</section>
 
 <?php if (!empty($this->link_items)) : ?>
-<div class="items-more">
+<section class="items-more">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><?php echo JText::_('COM_CONTENT_MORE_ARTICLES'); ?></h3>
     </div>
     <?php echo $this->loadTemplate('links'); ?>
   </div>
-</div>
+</section>
 <?php endif;
 
 if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) :

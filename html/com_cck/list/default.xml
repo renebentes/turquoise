@@ -36,9 +36,9 @@
 			<field name="auto_redirect" type="cck" construction="core_auto_redirection" default="" cck_selectlabel="Use Global"
 				   label="COM_CCK_CONFIG_AUTO_REDIRECTION" description="COM_CCK_CONFIG_AUTO_REDIRECTION_DESC" class="inputbox" />
 			<field name="ordering" type="cck" construction="core_ordering2" cck_selectlabel="Use Global" label="COM_CCK_CONFIG_ORDERING" default="" description="COM_CCK_CONFIG_ORDERING_DESC" class="inputbox" />
-			<field name="order_by" type="cck" construction="core_order_by" default="" label="" description="" class="inputbox" 
+			<field name="order_by" type="cck" construction="core_order_by" default="" label="" description="" class="inputbox"
 				   js_appendto="jform_params_ordering=#jform_params_order_by" js_isvisiblewhen="div#jform_params_order_by-more='jform_params_ordering','-1',false" js_format="html" hidden="true" />
-			
+
 			<field name="show_items_number" type="cck" construction="core_show_hide" default="" cck_selectlabel="Use Global"
 				   label="COM_CCK_CONFIG_SHOW_ITEMS_NUMBER" description="COM_CCK_CONFIG_SHOW_ITEMS_NUMBER_DESC" class="inputbox" />
 			<field name="show_items_number_label" type="cck" construction="core_label_total" default="" label="" description="" class="inputbox" />
@@ -53,9 +53,9 @@
 				   label="COM_CCK_CONFIG_SHOW_PAGES_NUMBER" description="COM_CCK_CONFIG_SHOW_PAGES_NUMBER_DESC" class="inputbox" />
 			<field name="show_pagination" type="cck" construction="core_show_pagination" default="" cck_selectlabel="Use Global"
 				   label="COM_CCK_CONFIG_SHOW_PAGINATION" description="COM_CCK_CONFIG_SHOW_PAGINATION_DESC" class="inputbox" />
-			<field name="class_pagination" type="cck" construction="core_class_pagination" default="" label="" description="" class="inputbox" 
+			<field name="class_pagination" type="cck" construction="core_class_pagination" default="" label="" description="" class="inputbox"
 				   js_appendto="jform_params_show_pagination=#jform_params_class_pagination" js_isvisiblewhen="div#jform_params_class_pagination-more='jform_params_show_pagination','-1,0,1',false" js_format="html" hidden="true" />
-			
+
 			<field name="urlvars" type="text" label="COM_CCK_CONFIG_URL_VARS" description="COM_CCK_CONFIG_URL_VARS_DESC" class="inputbox" size="50" />
 		</fieldset>
 		<fieldset name="cck-overrides" label="LIB_CCK_FIELDSET_OVERRIDES" description="COM_CCK_CONFIG_LIST_LIVE_DESC">

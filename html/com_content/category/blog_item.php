@@ -101,19 +101,9 @@ $canEdit = $this->item->params->get('access-edit');
       </dl>
     <?php endif; ?>
 
-    <?php if ($params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit) : ?>
-      <div class="btn-group pull-right">
-        <?php if ($params->get('show_print_icon')) :
-          echo JHtml::_('icon.print_popup', $this->item, $params);
-        endif;
-        if ($params->get('show_email_icon')) :
-          echo JHtml::_('icon.email', $this->item, $params);
-        endif;
-        if ($canEdit) :
-          echo JHtml::_('icon.edit', $this->item, $params);
-        endif; ?>
-      </div>
-    <?php endif; ?>
+    <?php if ($canEdit || $params->get('show_print_icon') || $params->get('show_email_icon')) :
+      echo JLayoutHelper::render('joomla.content.icons', array('params' => $params, 'item' => $this->item, 'print' => false));
+    endif; ?>
     </aside>
   <?php endif; ?>
 
