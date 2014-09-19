@@ -15,7 +15,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 ?>
 
 <section class="blog-featured<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Blog">
-<?php if ($this->params->get('show_page_heading') != 0) : ?>
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
   </div>
@@ -24,8 +24,8 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 <?php $leadingcount = 0;
 if (!empty($this->lead_items)) :
   foreach ($this->lead_items as &$item) : ?>
-  <div class="row" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       <?php $this->item = &$item;
       echo $this->loadTemplate('item'); ?>
       </div>
@@ -43,10 +43,10 @@ if (!empty($this->intro_items)) :
     $rowcount = ((int) $key - $leadingcount) % (int) $this->columns + 1;
 
     if ($rowcount == 1) : ?>
-  <div class="row" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="row">
     <?php endif; ?>
 
-    <div class="col-md-<?php echo round(12/$this->columns); ?>">
+    <div class="col-md-<?php echo round(12/$this->columns); ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
     <?php $this->item = &$item;
       echo $this->loadTemplate('item');
     ?>
@@ -54,7 +54,7 @@ if (!empty($this->intro_items)) :
 
     <?php $counter++;
 
-    if (($rowcount == $this->columns) or ($counter == $introcount)) : ?>
+    if (($rowcount == $this->columns) || ($counter == $introcount)) : ?>
   </div>
   <hr class="half-rule">
     <?php endif;

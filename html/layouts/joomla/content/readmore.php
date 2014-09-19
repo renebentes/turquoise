@@ -14,7 +14,7 @@ $item   = $displayData['item'];
 ?>
 <p class="readmore">
   <a class="pull-left" href="<?php echo $displayData['link']; ?>" itemprop="url">
-    <span class="fa fa-arrow-circle-right"></span>
+    <span class="fa fa-share"></span>
   <?php if (!$params->get('access-view')) :
     echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
   elseif ($readmore = $item->alternative_readmore) :

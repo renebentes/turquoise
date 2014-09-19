@@ -18,6 +18,7 @@ defined('_JEXEC') or die;
   </div>
 <?php endif; ?>
   <div class="form-group">
+  <?php if (!$params->get('usetext')) : ?>
     <label for="modlgn-username" class="sr-only"><?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?></label>
     <div class="input-group">
       <span class="input-group-addon">
@@ -30,8 +31,13 @@ defined('_JEXEC') or die;
         </a>
       </span>
     </div>
+    <?php else : ?>
+      <label for="modlgn-username"><?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?></label>
+      <input id="modlgn-username" type="text" name="username" class="form-control" size="18" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>" />
+    <?php endif; ?>
   </div>
   <div class="form-group">
+  <?php if(!$params->get('usetext')) : ?>
     <label for="modlgn-passwd" class="sr-only"><?php echo JText::_('JGLOBAL_PASSWORD'); ?></label>
     <div class="input-group">
       <span class="input-group-addon">
@@ -44,7 +50,35 @@ defined('_JEXEC') or die;
         </a>
       </span>
     </div>
+  <?php else : ?>
+    <label for="modlgn-passwd"><?php echo JText::_('JGLOBAL_PASSWORD'); ?></label>
+    <input id="modlgn-passwd" type="password" name="password" class="form-control" size="18"  placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>" />
+  <?php endif; ?>
   </div>
+  <?php if (count($twofactormethods) > 1) : ?>
+    <div class="form-group">
+    <?php if (!$params->get('usetext')) : ?>
+      <label for="modlgn-secretkey" class="sr-only"><?php echo JText::_('JGLOBAL_SECRETKEY') ?></label>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-key hasTooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>"></i>
+        </span>
+        <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
+        <span class="input-group-addon extra-tooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
+          <i class="fa fa-question"></i>
+        </span>
+      </div>
+    <?php else : ?>
+      <label for="modlgn-secretkey"><?php echo JText::_('JGLOBAL_SECRETKEY') ?></label>
+      <div class="input-group">
+        <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
+        <span class="input-group-addon extra-tooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
+          <i class="fa fa-question"></i>
+        </span>
+      </div>
+    <?php endif; ?>
+    </div>
+  <?php endif; ?>
 <?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
   <div class="checkbox">
     <label for="modlgn-remember">

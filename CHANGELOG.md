@@ -4,6 +4,11 @@ CHANGELOG
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
 * 1.0.4 - 26/08/2014
+  * Updated - mod_menu, mod_login
+  * Added - libraries/cck para customização
+  * Added - layout icons, info_blocks
+  * Updated - com_content article
+  * Updated - com_content category - blog
   * Updated - com_content featured - category
   * Added - com_cck
   * Updated - FontAwesome 4.2.0

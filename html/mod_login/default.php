@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-$doc = JFactory::getDocument();
+require_once JPATH_SITE . '/components/com_users/helpers/route.php';
 
 JHtml::_('behavior.keepalive');
 ?>
@@ -17,49 +17,27 @@ JHtml::_('behavior.keepalive');
 <?php if ($module->position == 'login') : ?>
   <ul class="nav navbar-nav navbar-right">
   <?php $usersConfig = JComponentHelper::getParams('com_users');
-  if ($type == 'login' && $usersConfig->get('allowUserRegistration')) : ?>
+  if ($usersConfig->get('allowUserRegistration')) : ?>
     <li>
       <a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-        <i class="glyphicon glyphicon-plus-sign"></i>
+        <span class="glyphicon glyphicon-plus-sign"></span>
         <?php echo JText::_('MOD_LOGIN_REGISTER'); ?>
       </a>
     </li>
   <?php endif; ?>
     <li class="dropdown">
       <a  href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <?php if ($type == 'logout') : ?>
-        <i class="glyphicon glyphicon-user"></i>
-        <?php require JModuleHelper::getLayoutPath('mod_login', 'default_greeting'); ?>
-        <i class="caret"></i>
-      </a>
-      <ul class="dropdown-menu">
-      <?php if ($doc->countModules('usermenu')) : ?>
-          <?php $renderer = $doc->loadRenderer('modules');
-          echo $renderer->render('usermenu', array('style' => 'usermenu'), null); ?>
-        <li class="divider"></li>
-      <?php endif; ?>
-        <li>
-          <?php require JModuleHelper::getLayoutPath('mod_login', 'default_logout'); ?>
-        </li>
-      </ul>
-    <?php else : ?>
-        <i class="glyphicon glyphicon-user"></i>
+        <span class="glyphicon glyphicon-user"></span>
         <?php echo JText::_('JLOGIN') ?>
-        <i class="caret"></i>
+        <span class="caret"></span>
       </a>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu" role="menu">
         <li>
           <?php require JModuleHelper::getLayoutPath('mod_login', 'default_login'); ?>
         </li>
       </ul>
-  <?php endif; ?>
     </li>
   </ul>
 <?php else :
-  if ($type == 'logout') :
-    require JModuleHelper::getLayoutPath('mod_login', 'default_greeting');
-    require JModuleHelper::getLayoutPath('mod_login', 'default_logout');
-  else :
-    require JModuleHelper::getLayoutPath('mod_login', 'default_login');
-  endif; ?>
-<?php endif; ?>
+  require JModuleHelper::getLayoutPath('mod_login', 'default_login');
+endif; ?>

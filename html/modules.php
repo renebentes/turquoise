@@ -160,7 +160,7 @@ function modChrome_standard($module, &$params, &$attribs)
           <li class="<?php echo $attribs['name'] == 'right' ? 'tab-right ' : null; ?>dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="glyphicon glyphicon-plus"></i>
-              <i class="caret"></i>
+              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
         <?php endif; ?>

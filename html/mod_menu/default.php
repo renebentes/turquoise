@@ -20,8 +20,24 @@ foreach ($list as $i => &$item) :
     $class .= ' current';
   endif;
 
-  if ($item->type == 'alias' && in_array($item->params->get('aliasoptions'), $path) || in_array($item->id, $path)) :
+  if (in_array($item->id, $path)) :
     $class .= ' active';
+  elseif ($item->type == 'alias') :
+    $aliasToId = $item->params->get('aliasoptions');
+    if (count($path) > 0 && $aliasToId == $path[count($path) - 1]) :
+      $class .= ' active';
+    elseif (in_array($aliasToId, $path)) :
+      $class .= ' alias-parent-active';
+    endif;
+  endif;
+
+  if ($item->type == 'separator') :
+    if ($item->deeper && $item->parent) :
+      $item->type = 'heading';
+    else :
+      $class       .= ' nav-divider';
+      $item->title = '';
+    endif;
   endif;
 
   if ($item->deeper) :
@@ -35,16 +51,6 @@ foreach ($list as $i => &$item) :
     $class .= ' parent';
   endif;
 
-  if ($item->type == 'separator' && !$item->deeper && !$item->parent) :
-    $class .= ' separator';
-    if (strtolower($item->title) == '-' || strtolower($item->title) == '_' || strtolower($item->title) == 'divider') :
-      $class       .= ' divider';
-      $item->title = '';
-    else :
-      $class .= ' nav-header';
-    endif;
-  endif;
-
   if (!empty($class)) :
     $class = ' class="' . trim($class) . '"';
   endif;
@@ -56,6 +62,7 @@ foreach ($list as $i => &$item) :
     case 'separator':
     case 'url':
     case 'component':
+    case 'heading':
       require JModuleHelper::getLayoutPath('mod_menu', 'default_' . $item->type);
       break;
     default:

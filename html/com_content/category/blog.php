@@ -14,7 +14,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 
-<section class="blog<?php echo $this->pageclass_sfx; ?>">
+<section class="blog<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Blog">
 <?php if ($this->params->get('show_page_heading') || $this->params->get('show_category_title', 1) || $this->params->get('page_subheading')) : ?>
   <div class="page-header">
   <?php if ($this->params->get('show_page_heading')) : ?>
@@ -30,21 +30,29 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
   </div>
 <?php endif; ?>
 
+<?php if ($this->params->get('show_description') || $this->params->get('show_description_image')) : ?>
+  <div class="well well-sm clearfix">
+  <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+    <figure class="col-md-4">
+      <img class="img-responsive" src="<?php echo $this->category->getParams()->get('image'); ?>"/>
+    </figure>
+  <?php endif; ?>
+  <?php if ($this->params->get('show_description') && $this->category->description) : ?>
+    <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+    <div class="col-md-8">
+    <?php endif; ?>
+    <?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
+    <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+    </div>
+    <?php endif; ?>
+  <?php endif;?>
+  </div>
+<?php endif; ?>
+
 <?php if ($this->params->get('show_cat_tags', 1) && !empty($this->category->tags->itemTags)) :
   $this->category->tagLayout = new JLayoutFile('joomla.content.tags');
   echo $this->category->tagLayout->render($this->category->tags->itemTags);
 endif; ?>
-
-<?php if ($this->params->get('show_description') || $this->params->get('show_description_image')) : ?>
-  <div class="well well-sm clearfix">
-  <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-    <img class="img-responsive" src="<?php echo $this->category->getParams()->get('image'); ?>"/>
-  <?php endif; ?>
-  <?php if ($this->params->get('show_description') && $this->category->description) : ?>
-    <?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
-  <?php endif;?>
-  </div>
-<?php endif; ?>
 
 <?php if (empty($this->lead_items) && empty($this->link_items) && empty($this->intro_items)) : ?>
   <?php if ($this->params->get('show_no_articles', 1)) : ?>
@@ -57,15 +65,16 @@ endif; ?>
 <?php $leadingcount = 0; ?>
 <?php if (!empty($this->lead_items)) :
   foreach ($this->lead_items as &$item) : ?>
-  <div class="row">
-    <?php $this->item = &$item;
-    echo $this->loadTemplate('item'); ?>
+  <div class="row" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="col-md-12">
+      <?php $this->item = &$item;
+      echo $this->loadTemplate('item'); ?>
+    </div>
   </div>
   <hr class="half-rule">
   <?php
     $leadingcount++;
-  ?>
-  <?php endforeach;
+  endforeach;
 endif;
 
 $introcount = (count($this->intro_items));
@@ -78,7 +87,7 @@ if (!empty($this->intro_items)) :
       $row = $counter / $this->columns; ?>
     <div class="row">
     <?php endif; ?>
-      <div class="col-md-<?php echo round(12/$this->columns); ?>">
+      <div class="col-md-<?php echo round(12/$this->columns); ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
       <?php
         $this->item = &$item;
         echo $this->loadTemplate('item');
@@ -86,13 +95,12 @@ if (!empty($this->intro_items)) :
       </div>
       <?php $counter++; ?>
 
-      <?php if (($rowcount == $this->columns) or ($counter == $introcount)) : ?>
+      <?php if (($rowcount == $this->columns) || ($counter == $introcount)) : ?>
     </div>
     <hr class="half-rule">
-    <?php endif; ?>
-  <?php endforeach; ?>
-<?php endif; ?>
-
+    <?php endif;
+  endforeach;
+endif; ?>
 </section>
 
 <?php if (!empty($this->link_items)) : ?>
@@ -119,7 +127,7 @@ if (!empty($this->intro_items)) :
 </section>
 <?php endif; ?>
 
-<?php if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) : ?>
+<?php if ($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) : ?>
   <?php echo $this->pagination->getPagesLinks(); ?>
   <?php if ($this->params->def('show_pagination_results', 1)) : ?>
   <p class="page-counter text-muted pull-right"><?php echo $this->pagination->getPagesCounter(); ?></p>

@@ -14,7 +14,6 @@ if ($params->get('name') == 0) :
 else :
   $login = $user->get('username');
 endif;
-
 if ($params->get('greeting')) :
   echo JText::sprintf('MOD_LOGIN_HINAME', htmlspecialchars($login));
 else :

@@ -33,6 +33,7 @@ abstract class tplTurquoiseHelper
     $template->path      = $template->baseurl . '/templates/' . $template->template;
 
     self::_clearDefaultJavascript($template);
+    self::_setMetadata($template);
     self::_prepareHead($template);
   }
 
@@ -118,6 +119,10 @@ abstract class tplTurquoiseHelper
 
       unset($scripts[$template->baseurl . '/media/system/js/mootools-core.js']);
       unset($scripts[$template->baseurl . '/media/system/js/caption.js']);
+      unset($scripts[$template->baseurl . '/media/jui/js/jquery.min.js']);
+      unset($scripts[$template->baseurl . '/media/jui/js/jquery-noconflict.js']);
+      unset($scripts[$template->baseurl . '/media/jui/js/jquery-migrate.min.js']);
+      unset($scripts[$template->baseurl . '/media/jui/js/bootstrap.min.js']);
 
 
       if (trim($filejs) !== '')
