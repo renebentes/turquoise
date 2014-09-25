@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
-require_once dirname(__FILE__) . '/config.php';
+require_once JPATH_SITE . '/templates/seb_one/config.php';
 
 $cck = CCK_Rendering::getInstance($this->template);
 if ($cck->initialize() === false)

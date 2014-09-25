@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::addIncludePath(dirname(dirname(__FILE__)));
@@ -176,7 +176,7 @@ else : ?>
   if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) :
     echo $this->pagination->getPagesLinks();
     if ($this->params->def('show_pagination_results', 1)) : ?>
-      <p class="page-counter text-muted"><?php echo $this->pagination->getPagesCounter(); ?></p>
+      <p class="page-counter text-muted pull-left"><?php echo $this->pagination->getPagesCounter(); ?></p>
     <?php endif;
   endif; ?>
 <?php endif; ?>

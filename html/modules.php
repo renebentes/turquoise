@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 /**
  * Module chrome for rendering user menu

@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 ?>
 <div class="alert alert-success">
   <h2><?php echo JText::_('COM_MAILTO_EMAIL_SENT'); ?></h2>

@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 $template = JFactory::getApplication()->getTemplate();
 require_once JPATH_SITE . '/templates/' . $template . '/html/com_content/image.php';

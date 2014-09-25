@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 $tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' : '';
 ?>

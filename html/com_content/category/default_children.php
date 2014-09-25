@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 if (count($this->children[$this->category->id]) > 0 && $this->maxLevel != 0) : ?>
   <ul class="nav nav-pills nav-stacked">

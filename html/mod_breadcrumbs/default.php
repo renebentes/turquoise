@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 $regex = "/\<img.+src\s*=\s*\"([^\"]*)\"[^\>]*\>/";
 if (preg_match($regex, $separator))

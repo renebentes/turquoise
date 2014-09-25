@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 jimport('joomla.html.pagination');
 
@@ -60,7 +60,19 @@ class TurquoisePagination extends JPagination
     $selected = $this->_viewall ? 0 : $this->limit;
 
     // Build the select list.
-    if ($app->isSite())
+    if ($app->isAdmin())
+    {
+      $html = JHtml::_(
+        'select.genericlist',
+        $limits,
+        $this->prefix . 'limit',
+        'class="inputbox input-mini" size="1" onchange="Joomla.submitform();"',
+        'value',
+        'text',
+        $selected
+      );
+    }
+    else
     {
       $html = JHtml::_(
         'select.genericlist',

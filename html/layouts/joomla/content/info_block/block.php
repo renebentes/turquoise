@@ -11,12 +11,12 @@ defined('_JEXEC') or die('Restricted access!');
 
 $blockPosition = $displayData['params']->get('info_block_position', 0);
 ?>
-<ul class="article-details text-muted pull-left">
+<dl class="article-details text-muted pull-left">
 <?php if ($displayData['position'] == 'above' && ($blockPosition == 0 || $blockPosition == 2) || $displayData['position'] == 'below' && ($blockPosition == 1)) : ?>
-  <?php if ($displayData['params']->get('info_block_show_title', 1)) : ?>
-  <li>
+  <?php if ($displayData['params']->get('info_block_show_title', 0) == 1) : ?>
+  <dt>
     <?php echo JText::_('COM_CONTENT_ARTICLE_INFO'); ?>
-  </li>
+  </dt>
   <?php endif; ?>
   <?php if ($displayData['params']->get('show_author') && !empty($displayData['item']->author )) : ?>
     <?php echo JLayoutHelper::render('joomla.content.info_block.author', $displayData); ?>
@@ -47,4 +47,4 @@ $blockPosition = $displayData['params']->get('info_block_position', 0);
     <?php echo JLayoutHelper::render('joomla.content.info_block.hits', $displayData); ?>
   <?php endif; ?>
 <?php endif; ?>
-</ul>
+</dl>

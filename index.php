@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 include_once JPATH_THEMES . '/' . $this->template . '/helper.php';
 

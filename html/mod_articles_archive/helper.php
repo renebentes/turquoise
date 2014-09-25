@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 require_once JPATH_SITE . '/modules/mod_articles_archive/helper.php';
 

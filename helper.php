@@ -47,28 +47,28 @@ abstract class tplTurquoiseHelper
   static private function _prepareHead($template)
   {
     if ($template->params->get('load') == 'remote') :
-      JFactory::getDocument()->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
-      JFactory::getDocument()->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+      $template->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
+      $template->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
-      JFactory::getDocument()->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
-      JFactory::getDocument()->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
+      $template->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
+      $template->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
     else :
-      JFactory::getDocument()->addStylesheet($template->path . '/css/bootstrap.min.css');
-      JFactory::getDocument()->addStylesheet($template->path . '/css/font-awesome.min.css');
+      $template->addStylesheet($template->path . '/css/bootstrap.min.css');
+      $template->addStylesheet($template->path . '/css/font-awesome.min.css');
 
-      JFactory::getDocument()->addScript($template->path . '/js/jquery-1.11.1.min.js');
-      JFactory::getDocument()->addScript($template->path . '/js/bootstrap.min.js');
+      $template->addScript($template->path . '/js/jquery-1.11.1.min.js');
+      $template->addScript($template->path . '/js/bootstrap.min.js');
     endif;
 
-    JFactory::getDocument()->addStylesheet($template->path . '/css/template.css');
-    JFactory::getDocument()->addScript($template->path . '/js/application.js');
+    $template->addStylesheet($template->path . '/css/template.css');
+    $template->addScript($template->path . '/js/application.js');
 
-    JFactory::getDocument()->addFavicon($template->params->get('favicon', $template->path . '/images/ico/favicon.ico'));
+    $template->addFavicon($template->params->get('favicon', $template->path . '/images/ico/favicon.ico'));
 
-    JFactory::getDocument()->addHeadlink($template->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
-    JFactory::getDocument()->addHeadlink($template->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
-    JFactory::getDocument()->addHeadlink($template->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
-    JFactory::getDocument()->addHeadlink($template->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
+    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
+    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
+    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
+    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
   }
 
   /**
@@ -228,6 +228,6 @@ abstract class tplTurquoiseHelper
   public static function getPageClass()
   {
     $class = JFactory::getApplication()->getParams()->get('pageclass_sfx', '');
-    return  !empty($class) ? ' class="' . $class : null ;
+    return !empty($class) ? ' class="' . $class : null;
   }
 }

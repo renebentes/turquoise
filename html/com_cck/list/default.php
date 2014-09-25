@@ -6,7 +6,8 @@
  * @license     GNU General Public License version 2 or later; see http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-defined( '_JEXEC' ) or die;
+// No direct access.
+defined('_JEXEC') or die('Restricted access!');
 
 $js = array();
 if ((JCck::getConfig_Param('validation', 2) > 1) && $this->config['validation'] != '')
@@ -34,12 +35,12 @@ $app = JFactory::getApplication();
 				return false;
 			}
 		}
-		jQuery("#seblod_form").append('<input type="hidden" id="return" name="return" value="<?php echo base64_encode( JFactory::getURI() ); ?>">');
+		jQuery("#seblod_form").append('<input type="hidden" id="return" name="return" value="<?php echo base64_encode(JFactory::getURI()); ?>">');
 		Joomla.submitform(task,document.getElementById('seblod_form'));
 	}
 </script>
 
-<div class="list<?php echo $this->pageclass_sfx; ?>">
+<section class="list<?php echo $this->pageclass_sfx; ?>">
 <?php if ($this->params->get('show_page_heading') || $this->show_list_title) : ?>
 	<div class="page-header">
 	<?php if ($this->params->get('show_page_heading')) : ?>
@@ -52,25 +53,22 @@ $app = JFactory::getApplication();
 	</div>
 <?php endif;
 
-if ($this->show_list_desc == 1 && $this->description != '') : ?>
-	<div class="well well-sm">
-		<?php echo JHtml::_( 'content.prepare', $this->description ); ?>
-	</div>
-<?php endif;
+if ($this->show_list_desc == 1 && $this->description != '') :
+	echo $this->raw_rendering ? JHtml::_( 'content.prepare', $this->description ) : '<div class="well well-sm">' . JHtml::_( 'content.prepare', $this->description ) . '</div>';
+endif;
 
 	echo $this->config['action'] ? $this->config['action'] : '<form action="' . ($this->home ? JUri::base(true) : JRoute::_('index.php?option=' . $this->option)). '" autocomplete="off" method="get" id="seblod_form" name="seblod_form" role="form">';
 
-if ($this->show_form == 1)
-{
+if ($this->show_form == 1) :
 	echo $this->form;
-} ?>
+endif; ?>
 
 		<input type="hidden" name="boxchecked" value="0" />
 	<?php if (!JFactory::getApplication()->getCfg('sef') || !$this->config['Itemid']) : ?>
 		<input type="hidden" name="option" value="com_cck" />
 		<input type="hidden" name="view" value="list" />
 		<?php if ( $this->home === false ) : ?>
-		<input type="hidden" name="Itemid" value="<?php echo $app->input->getInt( 'Itemid', 0 ); ?>" />
+		<input type="hidden" name="Itemid" value="<?php echo $app->input->getInt('Itemid', 0); ?>" />
 		<?php endif;
 	endif;
 
@@ -80,73 +78,60 @@ if ($this->show_form == 1)
 	<?php endif; ?>
 		<input type="hidden" name="search" value="<?php echo $this->search->name; ?>" />
 		<input type="hidden" name="task" value="search" />
-<?php /* ?>
-<div class="cck_page_list<?php echo $this->pageclass_sfx; ?> cck-clrfix" id="system">
-<?php } ?>
-	<?php
-	if ( isset( $this->pagination->pagesTotal ) ) {
-		$pages_total	=	$this->pagination->pagesTotal;
-	} elseif ( isset( $this->pagination->{'pages.total'} ) ) {
-		$pages_total	=	$this->pagination->{'pages.total'};
-	} else {
-		$pages_total	=	0;
-	}
+<?php
+	if (isset($this->pagination->pagesTotal))
+		$pages_total = $this->pagination->pagesTotal;
+	elseif (isset($this->pagination->{'pages.total'}))
+		$pages_total = $this->pagination->{'pages.total'};
+	else
+		$pages_total = 0;
+
 	$pagination_replace	=	'';
-	if ( $this->show_pagination > -2 && $pages_total > 1 ) {
-		$url			=	JUri::getInstance()->toString().'&';
-		if ( strpos( $url, '=&' ) !== false ) {
-			$vars		=	JUri::getInstance()->getQuery( true );
-			if ( count( $vars ) ) {
-				foreach ( $vars as $k=>$v ) {
-					if ( $v == '' ) {
-						$pagination_replace	.=	$k.'=&';
-					}
-				}
-			}
+	if ($this->show_pagination > -2 && $pages_total > 1)
+	{
+		$url = JUri::getInstance()->toString() . '&';
+		if (strpos($url, '=&') !== false)
+		{
+			$vars	= JUri::getInstance()->getQuery(true);
+			if (count($vars))
+				foreach ($vars as $k=>$v)
+					if ($v == '')
+						$pagination_replace	.=	$k . '=&';
 		}
-	}*/
+	}
+
 	if ($this->show_items_number)
 	{
 		$label = $this->label_items_number;
 		if ($this->config['doTranslation'])
 		{
-			$label = JText::_( 'COM_CCK_' . str_replace(' ', '_', strtoupper(trim($label))));
+			$label = JText::_('COM_CCK_' . str_replace(' ', '_', strtoupper(trim($label))));
 		}
-		echo '<div class="' . $this->class_items_number . '"><span>' . $this->total . '</span> ' . $label . '</div>';
-	}/*
-	if ( ( $this->show_pagination == -1 || $this->show_pagination == 1 ) && $pages_total > 1 ) {
-		echo '<div class="'.$this->class_pagination.'">' . ( ( $pagination_replace != '' ) ? str_replace( '?', '?'.$pagination_replace, $this->pagination->getPagesLinks() ) : $this->pagination->getPagesLinks() ) . '</div>';
+		echo '<p class="page-counter text-muted pull-left">' . $label . ' <span class="label' . ($this->class_items_number == 'total' ? ' ' . trim($this->class_items_number) : ' label-default') . '">' . $this->total . '</span></p>';
 	}
-	if ( @$this->search->content > 0 ) {
-		echo ( $this->raw_rendering ) ? $this->data : '<div class="cck_page_items">'.$this->data.'</div>';
-	} else {
-		echo $this->loadTemplate( 'items' );
-	}
-	if ( ( $this->show_pages_number || $this->show_pagination > -1 ) && $pages_total > 1 ) {
-	    echo '<div class="'.$this->class_pagination.'">';
-		$pagesCounter	=	$this->pagination->getPagesCounter();
-    	if ( $this->show_pages_number && $pagesCounter ) {
-	        echo '<p class="counter">' . $pagesCounter . '</p>';
-    	}
-		if ( $this->show_pagination > -1 ) {
-			echo ( $pagination_replace != '' ) ? str_replace( '?', '?'.$pagination_replace, $this->pagination->getPagesLinks() ) : $this->pagination->getPagesLinks();
-		}
-	    echo '</div>';
-	}
-    ?>
-<?php if ( !$this->raw_rendering ) { ?>
-</div>
-<?php } ?>
+
+	if (($this->show_pagination == -1 || $this->show_pagination == 1) && $pages_total > 1)
+		echo $pagination_replace != '' ? str_replace('?', '?' . $pagination_replace, $this->pagination->getPagesLinks()) : $this->pagination->getPagesLinks();
+
+	if (@$this->search->content > 0)
+		echo ($this->raw_rendering) ? $this->data : '<div class="cck_page_items">' . $this->data . '</div>';
+	else
+		echo $this->loadTemplate('items');
+
+	if (($this->show_pages_number || $this->show_pagination > -1) && $pages_total > 1) : ?>
+		<p class="page-counter text-muted pull-left"><?php echo $this->pagination->getPagesCounter(); ?></p>
+    <?php if ($this->show_pagination > -1)
+			echo ($pagination_replace != '') ? str_replace('?', '?' . $pagination_replace, $this->pagination->getPagesLinks()) : $this->pagination->getPagesLinks();
+	endif; ?>
+
 <?php
-if ( $this->show_form == 2 ) {
-	echo ( $this->raw_rendering ) ? $this->form : '<div class="clr"></div><div class="cck_page_search'.$this->pageclass_sfx.'">' . $this->form . '</div>';
-}
-*/?>
+if ($this->show_form == 2) :
+	echo $this->raw_rendering ? $this->form : '<div class="clr"></div><div class="cck_page_search'.$this->pageclass_sfx.'">' . $this->form . '</div>';
+endif;
+?>
 </form>
 
-<?php if ( $this->show_list_desc == 2 && $this->description != '' ) : ?>
-	<div class="well well-sm">
-		<?php echo JHtml::_( 'content.prepare', $this->description ); ?>
-	</div>
-<?php endif; ?>
-</div>
+<?php if ( $this->show_list_desc == 2 && $this->description != '' ) :
+	echo $this->raw_rendering ? JHtml::_('content.prepare', $this->description) : '<div class="well well-sm">' . JHtml::_('content.prepare', $this->description) . '</div>';
+endif; ?>
+</section>

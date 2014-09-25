@@ -7,7 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access!');
 
 if($module->position == 'search') :
   $moduleclass_sfx = ' class="navbar-form' . $moduleclass_sfx . '"';

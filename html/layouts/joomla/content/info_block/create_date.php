@@ -9,9 +9,9 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 ?>
-<li class="extra-tooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
+<dd class="extra-tooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
   <span class="fa fa-calendar"></span>
   <time datetime="<?php echo JHtml::_('date', $displayData['item']->created, 'c'); ?>" itemprop="dateCreated">
     <?php echo JHtml::_('date', $displayData['item']->created, JText::_('DATE_FORMAT_LC3')); ?>
   </time>
-</li>
+</dd>

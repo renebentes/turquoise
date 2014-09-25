@@ -471,17 +471,15 @@ form > br + .form-group {
 
 .article-details {
   margin: 0;
-  padding: 5px 5px 0;
-  list-style: none;
-  vertical-align: middle;
+  padding: 1px 5px;
+  width: 90%;
+}
+
+.article-details > dd {
   display: inline-block;
 }
 
-.article-details > li {
-  display: inline-block;
-}
-
-.article-details > li + li:before {
+.article-details > dd + dd:before {
   padding: 0 3px;
   color: #333;
   content: "|";

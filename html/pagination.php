@@ -7,8 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die;
-
+defined('_JEXEC') or die('Restricted access!');
 
 /**
  * Renders the pagination footer
@@ -63,7 +62,7 @@ function pagination_list_render($list)
     }
   }
 
-  $html = '<ul class="pagination">';
+  $html = '<ul class="pagination pull-right">';
   $html .= $list['start']['data'];
   $html .= $list['previous']['data'];
 
@@ -96,31 +95,31 @@ function pagination_list_render($list)
  *
  * @since   3.0
  */
-function pagination_item_active(&$item)
+function pagination_item_active(JPaginationObject &$item)
 {
   // Check for "Start" item
   if ($item->text == JText::_('JLIB_HTML_START'))
   {
-    $display = '<i class="fa fa-angle-double-left"></i>';
+    $display = '<i class="fa fa-fast-backward"></i>';
   }
 
   // Check for "Prev" item
   if ($item->text == JText::_('JPREV'))
   {
     $item->text = JText::_('JPREVIOUS');
-    $display = '<i class="fa fa-angle-left"></i>';
+    $display = '<i class="fa fa-backward"></i>';
   }
 
   // Check for "Next" item
   if ($item->text == JText::_('JNEXT'))
   {
-    $display = '<i class="fa fa-angle-right"></i>';
+    $display = '<i class="fa fa-forward"></i>';
   }
 
   // Check for "End" item
   if ($item->text == JText::_('JLIB_HTML_END'))
   {
-    $display = '<i class="fa fa-angle-double-right"></i>';
+    $display = '<i class="fa fa-fast-forward"></i>';
   }
 
   // If the display object isn't set already, just render the item with its text
@@ -147,26 +146,26 @@ function pagination_item_inactive(&$item)
   // Check for "Start" item
   if ($item->text == JText::_('JLIB_HTML_START'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-angle-double-left"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-fast-backward"></i></a></li>';
   }
 
   // Check for "Prev" item
   if ($item->text == JText::_('JPREV'))
   {
     $item->text = JText::_('JPREVIOUS');
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-angle-left"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-backward"></i></a></li>';
   }
 
   // Check for "Next" item
   if ($item->text == JText::_('JNEXT'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-angle-right"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-forward"></i></a></li>';
   }
 
   // Check for "End" item
   if ($item->text == JText::_('JLIB_HTML_END'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-angle-double-right"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-fast-forward"></i></a></li>';
   }
 
   // Check if the item is the active page
