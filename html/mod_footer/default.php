@@ -11,8 +11,7 @@ defined('_JEXEC') or die('Restricted access!');
 
 // Define Variables
 $created_year = 2013;
-$cur_year = JFactory::getDate()->format('Y');
-?>
+$cur_year = JFactory::getDate()->format('Y'); ?>
 
 <p>&copy; <?php echo (int)$cur_year > (int)$created_year ? $created_year . ' - ' . $cur_year : $created_year; ?>
   <a href="<?php echo JUri::root(); ?>"><strong><?php echo $app->getCfg('sitename'); ?></strong></a>.

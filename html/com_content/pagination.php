@@ -16,7 +16,7 @@ jimport('joomla.html.pagination');
  *
  * @package     Turquoise
  * @subpackage  tpl_turquoise
- * @since       2.5
+ * @since       3.3
  */
 class TurquoisePagination extends JPagination
 {
@@ -57,7 +57,7 @@ class TurquoisePagination extends JPagination
     $limits[] = JHtml::_('select.option', '100', JText::_('J100'));
     $limits[] = JHtml::_('select.option', '0', JText::_('JALL'));
 
-    $selected = $this->_viewall ? 0 : $this->limit;
+    $selected = $this->viewall ? 0 : $this->limit;
 
     // Build the select list.
     if ($app->isAdmin())

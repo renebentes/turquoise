@@ -16,12 +16,11 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 $params     = $this->item->params;
 $images     = json_decode($this->item->images);
 $urls       = json_decode($this->item->urls);
-$canEdit    = $this->item->params->get('access-edit');
+$canEdit    = $params->get('access-edit');
 $user       = JFactory::getUser();
 $info       = $this->item->params->get('info_block_position', 0);
-$useDefList = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $this->params->get('show_tags', 1);
+$useDefList = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author');
 $showIcons  = $params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit;
-
 ?>
 
 <section class="article<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Article">
@@ -104,7 +103,7 @@ endif; ?>
     <?php if (isset($urls) && ((!empty($urls->urls_position)  && $urls->urls_position == '1') || $params->get('urls_position') == '1')) : ?>
       <?php echo $this->loadTemplate('links'); ?>
     <?php endif; ?>
-  <?php elseif ($params->get('show_noauth') == true &&  $user->get('guest')) :
+  <?php elseif ($params->get('show_noauth') == true && $user->get('guest')) :
     echo $this->item->introtext;
     if ($params->get('show_readmore') && $this->item->fulltext != null) :
       $link = new JUri(JRoute::_('index.php?option=com_users&view=login'));
@@ -117,5 +116,9 @@ endif; ?>
     echo $this->item->pagination;
   endif; ?>
 
-  <?php echo $this->item->event->afterDisplayContent; ?>
+<?php if (!empty($this->item->event->afterDisplayContent)) : ?>
+  <div class="well well-sm clearfix">
+    <?php echo $this->item->event->beforeDisplayContent; ?>
+  </div>
+<?php endif; ?>
 </section>

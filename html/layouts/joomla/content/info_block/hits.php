@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 ?>
-<dd class="extra-tooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
+<dd class="extra-tooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
   <span class="fa fa-eye fa-fw"></span>
   <?php echo $displayData['item']->hits; ?>
   <meta itemprop="interactionCount" content="UserPageVisits:<?php echo $displayData['item']->hits; ?>" />

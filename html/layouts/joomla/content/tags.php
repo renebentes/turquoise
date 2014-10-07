@@ -14,7 +14,7 @@ JLoader::register('TagsHelperRoute', JPATH_BASE . '/components/com_tags/helpers/
 
 <?php if (!empty($displayData)) : ?>
   <p class="tags">
-    <span class="fa fa-tags hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_TAGS'); ?>"></span>
+    <span class="fa fa-tags hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_TAGS'); ?>"></span>
   <?php foreach ($displayData as $i => $tag) : ?>
     <?php if (in_array($tag->access, JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id')))) : ?>
       <?php $tagParams = new JRegistry($tag->params); ?>

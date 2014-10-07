@@ -34,7 +34,7 @@ $params = &$this->params;
           <?php if ($params->get('show_parent_category') && $item->parent_slug != '1:root' && $item->parent_slug) :
             $title = $this->escape($item->parent_title);
             $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($item->parent_slug)) . '">' . $title . '</a>'; ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PARENT_CATEGORY'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PARENT_CATEGORY'); ?>">
               <i class="fa fa-tags"></i>
             <?php if ($params->get('link_parent_category') && $item->parent_slug) : ?>
               <?php echo $url; ?>
@@ -46,7 +46,7 @@ $params = &$this->params;
           <?php if ($params->get('show_category')) :
             $title = $this->escape($item->category_title);
             $url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($item->catslug)) . '">' . $title . '</a>';?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
               <i class="fa fa-tag"></i>
             <?php if ($params->get('link_category') && $item->catslug) : ?>
               <?php echo $url; ?>
@@ -56,26 +56,26 @@ $params = &$this->params;
             </dd>
           <?php endif; ?>
           <?php if ($params->get('show_create_date')) : ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CREATE_DATE'); ?>">
               <time datetime="<?php echo JHtml::_('date', $item->created, 'Y-m-d'); ?>"></time>
               <i class="fa fa-calendar"></i> <?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC3')); ?>
             </dd>
           <?php endif; ?>
           <?php if ($params->get('show_modify_date')) : ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_UPDATE_DATE'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_UPDATE_DATE'); ?>">
               <time datetime="<?php echo JHtml::_('date', $item->modified, 'Y-m-d'); ?>"></time>
               <i class="fa fa-calendar"></i> <?php echo JHtml::_('date', $item->modified, JText::sprintf('DATE_FORMAT_LC3')); ?>
             </dd>
           <?php endif; ?>
           <?php if ($params->get('show_publish_date')) : ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PUBLISH_DATE'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_PUBLISH_DATE'); ?>">
               <time datetime="<?php echo JHtml::_('date', $item->publish_up, 'Y-m-d'); ?>"></time>
               <i class="fa fa-calendar"></i>
               <?php echo JHtml::_('date', $item->publish_up, JText::_('DATE_FORMAT_LC3')); ?>
             </dd>
           <?php endif; ?>
           <?php if ($params->get('show_author') && !empty($item->author )) : ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>">
               <i class="fa fa-user"></i>
               <?php $author = $item->author; ?>
               <?php $author = ($item->created_by_alias ? $item->created_by_alias : $author); ?>
@@ -88,7 +88,7 @@ $params = &$this->params;
             </dd>
           <?php endif; ?>
           <?php if ($params->get('show_hits')) : ?>
-            <dd class="hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
+            <dd class="hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_HITS'); ?>">
               <i class="fa fa-eye"></i><?php echo $item->hits; ?>
             </dd>
           <?php endif; ?>

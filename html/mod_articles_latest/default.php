@@ -10,9 +10,7 @@
 defined('_JEXEC') or die('Restricted access!');
 
 $template = JFactory::getApplication()->getTemplate();
-require_once JPATH_SITE . '/templates/' . $template . '/html/com_content/image.php';
-
-?>
+require_once JPATH_SITE . '/templates/' . $template . '/html/com_content/image.php'; ?>
 
 <ul class="latestnews media-list">
 <?php foreach ($list as $item) : ?>

@@ -9,8 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
-$tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' : '';
-?>
+$tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' : ''; ?>
 
 <ul class="nav<?php echo $class_sfx;?>"<?php echo $tag; ?>>
 <?php

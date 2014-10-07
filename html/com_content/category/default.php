@@ -14,36 +14,13 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
 
 ?>
 <section class="category-list<?php echo $this->pageclass_sfx; ?>">
-<?php if ($this->params->get('show_page_heading') or $this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
-  <div class="page-header">
-  <?php if ($this->params->get('show_page_heading')) : ?>
-    <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
-  <?php endif; ?>
-  <?php if ($this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
-    <h2><?php echo $this->escape($this->params->get('page_subheading'));
-    if ($this->params->get('show_category_title')) : ?>
-      <small><?php echo $this->category->title; ?></small>
-    <?php endif; ?>
-    </h2>
-  <?php endif; ?>
-  </div>
-<?php endif; ?>
-
-<?php if (($this->params->get('show_description_image') && $this->category->getParams()->get('image')) || ($this->params->get('show_description') && $this->category->description)) : ?>
-  <div class="well well-sm clearfix">
-  <?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-    <img class="img-responsive pull-left" src="<?php echo $this->category->getParams()->get('image'); ?>"/>
-  <?php endif; ?>
-  <?php if ($this->params->get('show_description') && $this->category->description) : ?>
-    <?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
-  <?php endif;?>
-  </div>
-<?php endif; ?>
-
-  <?php echo $this->loadTemplate('articles'); ?>
+<?php
+  $this->subtemplatename = 'articles';
+  echo JLayoutHelper::render('joomla.content.category_default', $this);
+?>
 </section>
 
-<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
+<?php if (!empty($this->children[$this->category->id]) && $this->maxLevel != 0) : ?>
 <section class="cat-children">
   <div class="panel panel-info">
   <?php if ($this->params->get('show_category_heading_title_text', 1) == 1) : ?>

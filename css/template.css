@@ -650,6 +650,22 @@ form + table {
 }
 
 /**
+ * Modal Styles
+ */
+.modal-header {
+  position: relative;
+}
+
+.modal-header .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/**
  * Footer Styles
  */
 .wrap-footer {
@@ -676,7 +692,7 @@ form + table {
 
 .footer-bottom {
   overflow: hidden;
-  padding: 15px 0;
+  padding: 10px 0 0 0;
   border-top: 1px solid #444;
   border-top: 1px solid rgba(0,0,0,.1);
   background-color: #3a3a3a;
@@ -696,6 +712,31 @@ form + table {
   display: none;
   background: rgba();
   cursor: pointer;
+}
+
+/**
+ * Thumbnails Styles
+ */
+.thumbnails {
+  margin: 0 -10px 20px;
+  overflow: hidden;
+}
+
+.thumbnails-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.thumbnails-list li {
+  float: left;
+  width: 25%;
+  height: 115px;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 1px solid #fff;
 }
 
 /**

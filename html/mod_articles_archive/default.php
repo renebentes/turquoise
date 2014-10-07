@@ -10,9 +10,7 @@
 defined('_JEXEC') or die('Restricted access!');
 
 require_once dirname(__FILE__) . '/helper.php';
-$list = modTurquoiseArchiveHelper::getList($params);
-
-?>
+$list = modTurquoiseArchiveHelper::getList($params); ?>
 
 <ul class="archive-module nav nav-list">
 <?php foreach ($list as $item) : ?>

@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 ?>
-<dd class="extra-tooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<dd class="extra-tooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_AUTHOR'); ?>" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <span class="fa fa-user"></span>
   <?php $author = '<span itemprop="name">' . ($displayData['item']->created_by_alias ? $displayData['item']->created_by_alias : $displayData['item']->author)  . '</span>'; ?>
 <?php if (!empty($displayData['item']->contactid ) && $displayData['params']->get('link_author') == true):?>

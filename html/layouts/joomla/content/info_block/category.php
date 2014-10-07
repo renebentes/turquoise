@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 ?>
-<dd class="extra-tooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
+<dd class="extra-tooltip" title="<?php echo JText::_('TPL_TURQUOISE_TOOLTIP_CATEGORY'); ?>">
   <span class="fa fa-folder"></span>
   <?php $title = $this->escape($displayData['item']->category_title);
 if ($displayData['params']->get('link_category') && $displayData['item']->catslug) :

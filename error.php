@@ -50,18 +50,6 @@ endif;
   <body>
     <a href="#content" class="sr-only">Skip to content</a>
     <header class="wrap-header">
-    <?php if ($doc->countModules('topmenu') || $doc->countModules('login')) : ?>
-      <nav class="navbar navbar-blue-transparent navbar-sm" role="navigation">
-        <div class="container">
-        <?php if ($doc->countModules('topmenu')) : ?>
-          <?php echo $doc->getBuffer('modules', 'topmenu', array('name' => 'topmenu', 'style' => 'none')); ?>
-        <?php endif; ?>
-        <?php if ($doc->countModules('login')) : ?>
-          <?php echo $doc->getBuffer('modules', 'login', array('name' => 'login', 'style' => 'none')); ?>
-        <?php endif; ?>
-        </div>
-      </nav>
-    <?php endif;?>
       <div class="header">
         <div class="container">
           <div class="row">
@@ -80,18 +68,6 @@ endif;
         </div>
       </div>
     </header>
-  <?php if ($doc->countModules('submenu')) : ?>
-    <?php echo $doc->getBuffer('modules', 'submenu', array('name' => 'submenu', 'style' => 'navbar')); ?>
-  <?php endif; ?>
-  <?php if ($doc->countModules('breadcrumbs')) : ?>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <?php echo $doc->getBuffer('modules', 'breadcrumbs', array('name' => 'breadcrumbs', 'style' => 'none')); ?>
-        </div>
-      </div>
-    </div>
-  <?php endif; ?>
     <main id="content" class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3 text-center">

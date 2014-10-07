@@ -24,6 +24,9 @@ jQuery.noConflict();
       container: "body"
     });
 
+    // Call Modal Ever
+    $('.modal-open').modal('show');
+
     // Call Remote in Modal
     $('.modal-remote').click(function () {
       var url    = $(this).attr('href');
@@ -75,7 +78,7 @@ jQuery.noConflict();
 
     // Fixed navbar
     $(window).scroll(function () {
-      if (($(this).scrollTop() > 200 && !$('.wrap-header').first().is('nav')) || $(this).scrollTop() > 240) {
+      if (($(this).scrollTop() > 190 && !$('.wrap-header').first().is('nav')) || $(this).scrollTop() > 240) {
         $('.navbar-fixed').addClass('navbar-fixed-top');
       } else {
         $('.navbar-fixed').removeClass('navbar-fixed-top');

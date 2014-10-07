@@ -9,9 +9,17 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
-require_once JPATH_SITE . '/templates/seb_one/config.php';
+global $user;
 
-$cck = CCK_Rendering::getInstance($this->template);
-if ($cck->initialize() === false)
-  return;
+$app      = JFactory::getApplication();
+$path_lib = JPATH_SITE . '/libraries/cck/rendering/rendering.php';
+$user     = JCck::getUser();
+
+if (!file_exists($path_lib))
+{
+  print('/libraries/cck/rendering/rendering.php file is missing.');
+  die;
+}
+
+require_once $path_lib;
 ?>

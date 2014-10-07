@@ -7,8 +7,7 @@
  */
 
 // No direct access.
-defined('_JEXEC') or die('Restricted access!');
-?>
+defined('_JEXEC') or die('Restricted access!'); ?>
 
 <div class="newsflash list-unstyled">
   <?php foreach ($list as $item) :?>

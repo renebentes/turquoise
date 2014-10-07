@@ -39,7 +39,7 @@ class JHtmlIcon
     {
       $text                           = '<i class="glyphicon glyphicon-plus"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-      $attribs['data-original-title'] = JText::_('JNEW');
+      $attribs['title'] = JText::_('JNEW');
     }
     else
     {
@@ -74,7 +74,7 @@ class JHtmlIcon
     {
       $text                           = '<i class="glyphicon glyphicon-envelope"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip modal-remote';
-      $attribs['data-original-title'] = JText::_('JGLOBAL_EMAIL');
+      $attribs['title'] = JText::_('JGLOBAL_EMAIL');
     }
     else
     {
@@ -129,7 +129,7 @@ class JHtmlIcon
       $url                            = "#";
       $text                           = '<i class="glyphicon glyphicon-lock"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-      $attribs['data-original-title'] = htmlspecialchars(JText::_('JLIB_HTML_CHECKED_OUT') .' :: '. JText::sprintf('COM_CONTENT_CHECKED_OUT_BY', $checkoutUser->name) . ' - ' . $date);
+      $attribs['title'] = htmlspecialchars(JText::_('JLIB_HTML_CHECKED_OUT') .' :: '. JText::sprintf('COM_CONTENT_CHECKED_OUT_BY', $checkoutUser->name) . ' - ' . $date);
 
       return JHtml::_('link', JRoute::_($url), $text, $attribs);
     }
@@ -138,7 +138,7 @@ class JHtmlIcon
 
     $text                           = '<i class="glyphicon glyphicon-pencil"></i>';
     $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-    $attribs['data-original-title'] = JText::_('JGLOBAL_EDIT');
+    $attribs['title'] = JText::_('JGLOBAL_EDIT');
 
     return JHtml::_('link', JRoute::_($url), $text, $attribs);
   }
@@ -166,7 +166,7 @@ class JHtmlIcon
     {
       $text                           = '<i class="glyphicon glyphicon-print"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip modal-remote';
-      $attribs['data-original-title'] = JText::_('JGLOBAL_PRINT');
+      $attribs['title'] = JText::_('JGLOBAL_PRINT');
     }
     else
     {
@@ -197,7 +197,7 @@ class JHtmlIcon
       $text                           = '<i class="glyphicon glyphicon-print"></i>';
       $attribs['rel']                 = 'tooltip';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-      $attribs['data-original-title'] = JText::_('JGLOBAL_PRINT');
+      $attribs['title'] = JText::_('JGLOBAL_PRINT');
       $attribs['data-placement']      = 'left';
     }
     else
@@ -252,7 +252,7 @@ class JHtmlIcon
       $url                            = "#";
       $text                           = '<i class="glyphicon glyphicon-lock"></i>';
       $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-      $attribs['data-original-title'] = htmlspecialchars(JText::_('JLIB_HTML_CHECKED_OUT') .' :: '. JText::sprintf('COM_CONTENT_CHECKED_OUT_BY', $checkoutUser->name) . ' - ' . $date);
+      $attribs['title'] = htmlspecialchars(JText::_('JLIB_HTML_CHECKED_OUT') .' :: '. JText::sprintf('COM_CONTENT_CHECKED_OUT_BY', $checkoutUser->name) . ' - ' . $date);
 
       return JHtml::_('link', JRoute::_($url), $text, $attribs);
     }
@@ -261,7 +261,7 @@ class JHtmlIcon
 
     $text                           = '<i class="glyphicon glyphicon-ok-circle"></i>';
     $attribs['class']               = 'btn btn-default btn-xs extra-tooltip';
-    $attribs['data-original-title'] = JText::_('JGLOBAL_EDIT');
+    $attribs['title'] = JText::_('JGLOBAL_EDIT');
 
     return JHtml::_('link', JRoute::_($url), $text, $attribs);
   }

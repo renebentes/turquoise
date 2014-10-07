@@ -8,9 +8,8 @@
   <authorUrl></authorUrl>
   <copyright>Copyright (C) 2014 Rene Bentes Pinto, Inc. All rights reserved.</copyright>
   <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <description>TPL_TURQUOISE_XML_DESCRIPTION</description>
-  <scriptfile>script.php</scriptfile>
   <files>
     <folder>css</folder>
     <folder>fonts</folder>
@@ -32,6 +31,7 @@
     <filename>templateDetails.xml</filename>
   </files>
   <positions>
+    <position>bellow</position>
     <position>breadcrumbs</position>
     <position>copyright</position>
     <position>debug</position>

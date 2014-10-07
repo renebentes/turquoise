@@ -7,9 +7,9 @@
  */
 
 // no direct access
-defined('_JEXEC') or die;
-?>
-<?php if ($params->get('item_title')) : ?>
+defined('_JEXEC') or die('Restricted access!');
+
+if ($params->get('item_title')) : ?>
   <<?php echo $params->get('item_heading'); ?>>
   <?php if ($params->get('link_titles') && $item->link != '') : ?>
     <a href="<?php echo $item->link;?>">

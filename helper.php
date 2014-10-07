@@ -32,9 +32,9 @@ abstract class tplTurquoiseHelper
     $template->direction = !isset($template->direction) ? $template->direction : $template->direction;
     $template->path      = $template->baseurl . '/templates/' . $template->template;
 
-    self::_clearDefaultJavascript($template);
-    self::_setMetadata($template);
+    self::_setMetadata();
     self::_prepareHead($template);
+    self::_clearDefaultJavascript($template);
   }
 
   /**
@@ -46,29 +46,31 @@ abstract class tplTurquoiseHelper
    */
   static private function _prepareHead($template)
   {
+    $doc = JFactory::getDocument();
+    $doc->addScript($template->path . '/js/application.js');
+
     if ($template->params->get('load') == 'remote') :
-      $template->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
-      $template->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+      $doc->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
+      $doc->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
-      $template->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
-      $template->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
+      $doc->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
+      $doc->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
     else :
-      $template->addStylesheet($template->path . '/css/bootstrap.min.css');
-      $template->addStylesheet($template->path . '/css/font-awesome.min.css');
+      $doc->addStylesheet($template->path . '/css/bootstrap.min.css');
+      $doc->addStylesheet($template->path . '/css/font-awesome.min.css');
 
-      $template->addScript($template->path . '/js/jquery-1.11.1.min.js');
-      $template->addScript($template->path . '/js/bootstrap.min.js');
+      $doc->addScript($template->path . '/js/bootstrap.min.js');
+      $doc->addScript($template->path . '/js/jquery-1.11.1.min.js');
     endif;
 
-    $template->addStylesheet($template->path . '/css/template.css');
-    $template->addScript($template->path . '/js/application.js');
+    $doc->addStylesheet($template->path . '/css/template.css');
 
-    $template->addFavicon($template->params->get('favicon', $template->path . '/images/ico/favicon.ico'));
+    $doc->addFavicon($template->params->get('favicon') ? $template->params->get('favicon') : $template->path . '/images/ico/favicon.ico');
 
-    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
-    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
-    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
-    $template->addHeadlink($template->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
+    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
+    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
+    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
+    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
   }
 
   /**
@@ -110,13 +112,12 @@ abstract class tplTurquoiseHelper
    */
   static private function _clearDefaultJavascript($template)
   {
-    $scripts = $template->_scripts;
-    $script  = $template->_script;
+    $doc     = JFactory::getDocument();
+    $scripts = $doc->_scripts;
+    $script  = $doc->_script;
 
     if($template->params->get('disablejs'))
     {
-      $filejs = $template->params->get('filejs', '');
-
       unset($scripts[$template->baseurl . '/media/system/js/mootools-core.js']);
       unset($scripts[$template->baseurl . '/media/system/js/caption.js']);
       unset($scripts[$template->baseurl . '/media/jui/js/jquery.min.js']);
@@ -124,7 +125,7 @@ abstract class tplTurquoiseHelper
       unset($scripts[$template->baseurl . '/media/jui/js/jquery-migrate.min.js']);
       unset($scripts[$template->baseurl . '/media/jui/js/bootstrap.min.js']);
 
-
+      $filejs = $template->params->get('filejs', '');
       if (trim($filejs) !== '')
       {
         $filejs = explode(',', $filejs);
@@ -142,8 +143,8 @@ abstract class tplTurquoiseHelper
         }
     }
 
-    $template->_scripts = $scripts;
-    $template->_script  = $script;
+    $doc->_scripts = array_reverse($scripts);
+    $doc->_script  = $script;
   }
 
   /**
@@ -151,12 +152,13 @@ abstract class tplTurquoiseHelper
    *
    * @param JDocument $template The html document
    */
-  private static function _setMetadata($template)
+  private static function _setMetadata()
   {
-    $template->setGenerator(null);
-    $template->setMetaData('author','Rene Bentes Pinto');
-    $template->setMetaData('X-UA-Compatible','IE=edge,chrome=1', true);
-    $template->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+    $doc = JFactory::getDocument();
+    $doc->setGenerator(null);
+    $doc->setMetaData('author','Rene Bentes Pinto');
+    $doc->setMetaData('X-UA-Compatible','IE=edge,chrome=1', true);
+    $doc->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
   }
 
   public static function isNewJoomla()

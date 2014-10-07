@@ -128,7 +128,7 @@ function pagination_item_active(JPaginationObject &$item)
     $display = $item->text;
   }
 
-  return '<li><a class="hasTooltip" data-original-title="' . $item->text . '" href="' . $item->link . '">' . $display . '</a></li>';
+  return '<li><a class="hasTooltip" title="' . $item->text . '" href="' . $item->link . '">' . $display . '</a></li>';
 }
 
 
@@ -146,34 +146,34 @@ function pagination_item_inactive(&$item)
   // Check for "Start" item
   if ($item->text == JText::_('JLIB_HTML_START'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-fast-backward"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" title="' . $item->text . '" ><i class="fa fa-fast-backward"></i></a></li>';
   }
 
   // Check for "Prev" item
   if ($item->text == JText::_('JPREV'))
   {
     $item->text = JText::_('JPREVIOUS');
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-backward"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" title="' . $item->text . '" ><i class="fa fa-backward"></i></a></li>';
   }
 
   // Check for "Next" item
   if ($item->text == JText::_('JNEXT'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-forward"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" title="' . $item->text . '" ><i class="fa fa-forward"></i></a></li>';
   }
 
   // Check for "End" item
   if ($item->text == JText::_('JLIB_HTML_END'))
   {
-    return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" ><i class="fa fa-fast-forward"></i></a></li>';
+    return '<li class="disabled"><a class="hasTooltip" title="' . $item->text . '" ><i class="fa fa-fast-forward"></i></a></li>';
   }
 
   // Check if the item is the active page
   if ((isset($item->active) && $item->active) || (is_numeric($item->text) && is_null($item->link)))
   {
-    return '<li class="active"><a class="hasTooltip" data-original-title="' . $item->text . '" >' . $item->text . '<span class="sr-only">(current)</span></a></li>';
+    return '<li class="active"><a class="hasTooltip" title="' . $item->text . '" >' . $item->text . '<span class="sr-only">(current)</span></a></li>';
   }
 
   // Doesn't match any other condition, render a normal item
-  return '<li class="disabled"><a class="hasTooltip" data-original-title="' . $item->text . '" >' . $item->text . '</a></li>';
+  return '<li class="disabled"><a class="hasTooltip" title="' . $item->text . '" >' . $item->text . '</a></li>';
 }

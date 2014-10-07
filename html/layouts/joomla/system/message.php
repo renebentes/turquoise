@@ -22,7 +22,7 @@ $classes = array(
 if (is_array($messageList) && !empty($messageList)) :
   foreach ($messageList as $type => $messages) : ?>
   <div class="alert alert-<?php echo $classes[strtolower($type)]; ?> alert-dismissible fade in" role="alert">
-    <button type="button" class="close hasTooltip" data-original-title="<?php echo JText::_('TPL_TURQUOISE_CLOSE'); ?>" data-placement="bottom" data-dismiss="alert">
+    <button type="button" class="close hasTooltip" title="<?php echo JText::_('TPL_TURQUOISE_CLOSE'); ?>" data-placement="bottom" data-dismiss="alert">
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>

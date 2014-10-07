@@ -18,7 +18,7 @@ if (preg_match($regex, $separator))
 <ul class="breadcrumb<?php echo !empty($separator) ? ' breadcrumb-overwrite' : null; ?><?php echo $moduleclass_sfx; ?>">
 <?php if ($params->get('showHere', 1))
 {
-  echo '<li class="showhere"><span class="fa fa-map-marker hasTooltip" data-original-title="' . trim(str_replace(':', '', JText::_('MOD_BREADCRUMBS_HERE'))) . '"></span></li>';
+  echo '<li class="showhere"><span class="fa fa-map-marker hasTooltip" title="' . trim(str_replace(':', '', JText::_('MOD_BREADCRUMBS_HERE'))) . '"></span></li>';
 }
 for ($i = 0; $i < $count; $i ++) :
   if ($i == 1 && !empty($list[$i]->link) && !empty($list[$i - 1]->link) && $list[$i]->link == $list[$i - 1]->link)

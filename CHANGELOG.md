@@ -3,9 +3,12 @@ CHANGELOG
 
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
+* 1.0.5 - 02/10/2014
+  * Added - reecrita de exibição para app work
+  * Added - tpl_seb_minima para reescrita de exibições do Seblod
+  * Removed - script.php
 * 1.0.4 - 26/08/2014
   * Updated - mod_menu, mod_login
-  * Added - libraries/cck para customização
   * Added - layout icons, info_blocks
   * Updated - com_content article
   * Updated - com_content category - blog

@@ -9,9 +9,17 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
-if ($params->get('backgroundimage'))
+global $user;
+
+$app      = JFactory::getApplication();
+$path_lib = JPATH_SITE . '/libraries/cck/rendering/rendering.php';
+$user     = JCck::getUser();
+
+if (!file_exists($path_lib))
 {
-  JFactory::getDocument()->addStyleDeclaration('background-image: url("' . $params->get('backgroundimage') .'")');
+  print('/libraries/cck/rendering/rendering.php file is missing.');
+  die;
 }
 
-echo $module->content;
+require_once $path_lib;
+?>

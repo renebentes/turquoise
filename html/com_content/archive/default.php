@@ -23,7 +23,7 @@ JHtml::addIncludePath(dirname(dirname(__FILE__)));
     <?php if ($this->params->get('filter_field') != 'hide') : ?>
       <div class="form-group">
         <label for="filter-search" class="sr-only"><?php echo JText::_('COM_CONTENT_' . $this->params->get('filter_field') . '_FILTER_LABEL'); ?></label>
-        <input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->filter); ?>" class="form-control hasTooltip" onchange="document.adminForm.submit();" data-original-title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
+        <input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->filter); ?>" class="form-control hasTooltip" onchange="document.adminForm.submit();" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
       </div>
     <?php endif; ?>
       <div class="form-group">

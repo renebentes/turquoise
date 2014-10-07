@@ -7,8 +7,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die;
-?>
+defined('_JEXEC') or die('Restricted access!'); ?>
 
 <ul class="newsflash-horiz list-unstyled">
 	<?php for ($i = 0, $n = count($list); $i < $n; $i ++) :

@@ -16,7 +16,7 @@ if (count($this->children[$this->category->id]) > 0 && $this->maxLevel != 0) : ?
     <li>
       <a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($child->id)); ?>"<?php echo $this->params->get('show_subcat_desc') == 1 && $child->description ? ' class="hasPopover" data-content="' . JHtml::_('content.prepare', $child->description, '', 'com_content.category') . '" data-placement="top"' : null; ?>>
       <?php if ($this->params->get('show_cat_num_articles', 1)) : ?>
-        <span class="badge hasTooltip pull-right" data-original-title="<?php echo JText::_('COM_CONTENT_NUM_ITEMS'); ?>">
+        <span class="badge hasTooltip pull-right" title="<?php echo JText::_('COM_CONTENT_NUM_ITEMS'); ?>">
           <?php echo $child->getNumItems(true); ?>
         </span>
       <?php endif ; ?>

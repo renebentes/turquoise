@@ -16,7 +16,7 @@ $urls = json_decode($this->item->urls);
 $params = $this->item->params;
 if ($urls && (!empty($urls->urla) || !empty($urls->urlb) || !empty($urls->urlc))) :
 ?>
-<ul class="nav nav-pills">
+<ul class="nav nav-pills nav-stacked">
 <?php
   $urlarray = array(
                 array($urls->urla, $urls->urlatext, $urls->targeta, 'a'),
@@ -58,7 +58,7 @@ if ($urls && (!empty($urls->urla) || !empty($urls->urlb) || !empty($urls->urlc))
           echo '  <div class="modal-dialog modal-lg">';
           echo '    <div class="modal-content">';
           echo '      <div class="modal-header">';
-          echo '        <button type="button" class="close hasTooltip" data-original-title="' . JText::_('TPL_TURQUOISE_CLOSE') . '" data-dismiss="modal" aria-hidden="true">×</button>';
+          echo '        <button type="button" class="close hasTooltip" title="' . JText::_('TPL_TURQUOISE_CLOSE') . '" data-dismiss="modal" aria-hidden="true">×</button>';
           echo '        <h4>' . htmlspecialchars($label) . '</h4>';
           echo '      </div>';
           echo '      <div class="modal-body"></div>';

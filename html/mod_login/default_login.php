@@ -22,10 +22,10 @@ defined('_JEXEC') or die('Restricted access!');
     <label for="modlgn-username" class="sr-only"><?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?></label>
     <div class="input-group">
       <span class="input-group-addon">
-        <i class="glyphicon glyphicon-user hasTooltip" data-original-title="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>"></i>
+        <i class="glyphicon glyphicon-user hasTooltip" title="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>"></i>
       </span>
       <input id="modlgn-username" type="text" name="username" class="form-control" size="18" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME') ?>" />
-      <span class="input-group-btn extra-tooltip" data-original-title="<?php echo JText::_('MOD_LOGIN_FORGOT_YOUR_USERNAME'); ?>">
+      <span class="input-group-btn extra-tooltip" title="<?php echo JText::_('MOD_LOGIN_FORGOT_YOUR_USERNAME'); ?>">
         <a class="btn btn-default" href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
           <i class="fa fa-question"></i>
         </a>
@@ -41,10 +41,10 @@ defined('_JEXEC') or die('Restricted access!');
     <label for="modlgn-passwd" class="sr-only"><?php echo JText::_('JGLOBAL_PASSWORD'); ?></label>
     <div class="input-group">
       <span class="input-group-addon">
-        <i class="glyphicon glyphicon-lock hasTooltip" data-original-title="<?php echo JText::_('JGLOBAL_PASSWORD') ?>"></i>
+        <i class="glyphicon glyphicon-lock hasTooltip" title="<?php echo JText::_('JGLOBAL_PASSWORD') ?>"></i>
       </span>
       <input id="modlgn-passwd" type="password" name="password" class="form-control" size="18"  placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>" />
-      <span class="input-group-btn extra-tooltip" data-original-title="<?php echo JText::_('MOD_LOGIN_FORGOT_YOUR_PASSWORD'); ?>">
+      <span class="input-group-btn extra-tooltip" title="<?php echo JText::_('MOD_LOGIN_FORGOT_YOUR_PASSWORD'); ?>">
         <a class="btn btn-default" href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
           <i class="fa fa-question"></i>
         </a>
@@ -61,10 +61,10 @@ defined('_JEXEC') or die('Restricted access!');
       <label for="modlgn-secretkey" class="sr-only"><?php echo JText::_('JGLOBAL_SECRETKEY') ?></label>
       <div class="input-group">
         <span class="input-group-addon">
-          <i class="fa fa-key hasTooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>"></i>
+          <i class="fa fa-key hasTooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>"></i>
         </span>
         <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
-        <span class="input-group-addon extra-tooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
+        <span class="input-group-addon extra-tooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
           <i class="fa fa-question"></i>
         </span>
       </div>
@@ -72,7 +72,7 @@ defined('_JEXEC') or die('Restricted access!');
       <label for="modlgn-secretkey"><?php echo JText::_('JGLOBAL_SECRETKEY') ?></label>
       <div class="input-group">
         <input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="form-control" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
-        <span class="input-group-addon extra-tooltip" data-original-title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
+        <span class="input-group-addon extra-tooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
           <i class="fa fa-question"></i>
         </span>
       </div>

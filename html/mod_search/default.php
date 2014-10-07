@@ -13,8 +13,7 @@ if($module->position == 'search') :
   $moduleclass_sfx = ' class="navbar-form' . $moduleclass_sfx . '"';
 elseif ($moduleclass_sfx) :
   $moduleclass_sfx = ' class="' . $moduleclass_sfx;
-endif;
-?>
+endif; ?>
 
 <form name="search" action="<?php echo JRoute::_('index.php');?>" method="post"<?php echo $moduleclass_sfx; ?> role="search">
 <?php
@@ -43,12 +42,12 @@ endif;
         break;
 
       case 'right' :
-        $output = $output . $label . '<div class="input-group">' . $input . '<span class="input-group-btn extra-tooltip" data-original-title="' . JText::_('MOD_SEARCH') . '">' . $button . '</span></div></div>';
+        $output = $output . $label . '<div class="input-group">' . $input . '<span class="input-group-btn extra-tooltip" title="' . JText::_('MOD_SEARCH') . '">' . $button . '</span></div></div>';
         break;
 
       case 'left' :
       default :
-        $output = $output . $label . '<div class="input-group"><span class="input-group-btn extra-tooltip" data-original-title="' . JText::_('MOD_SEARCH') . '">' . $button . '</span>' . $input . '</div></div>';
+        $output = $output . $label . '<div class="input-group"><span class="input-group-btn extra-tooltip" title="' . JText::_('MOD_SEARCH') . '">' . $button . '</span>' . $input . '</div></div>';
         break;
     endswitch;
   else :
