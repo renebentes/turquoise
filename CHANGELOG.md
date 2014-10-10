@@ -3,6 +3,8 @@ CHANGELOG
 
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
+* 1.0.6 - 10/10/2014
+  * Added - reescrita tpl_seb_blog sem contemplar todos os parâmetros
 * 1.0.5 - 02/10/2014
   * Added - reecrita de exibição para app work
   * Added - tpl_seb_minima para reescrita de exibições do Seblod

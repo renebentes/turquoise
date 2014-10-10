@@ -9,8 +9,8 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
-if ($item->getValue('command_photo')) : ?>
-  <img class="img-responsive hasTooltip" src="<?php echo $item->getValue('command_photo')->thumb2; ?>" title="<?php echo $item->getValue('command_title'); ?>" alt="<?php echo $item->getValue('command_title'); ?>"/>
+if ($cck->getValue('command_photo')) : ?>
+  <img class="img-responsive hasTooltip" src="<?php echo $cck->getValue('command_photo')->thumb2; ?>" title="<?php echo $cck->getValue('command_title'); ?>" alt="<?php echo $item->getValue('command_title'); ?>"/>
 <?php else : ?>
   <span class="fa fa-image fa-6x"></span>
 <?php endif; ?>

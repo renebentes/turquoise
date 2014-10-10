@@ -67,7 +67,7 @@ endif;
                 <?php echo tplTurquoiseHelper::getLogo($this); ?>
               </a>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <h1><?php echo $this->params->get('name'); ?></h1>
             <?php if ($this->params->get('slogan')) : ?>
               <p class="lead"><?php echo $this->params->get('slogan'); ?></p>
