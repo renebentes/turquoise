@@ -62,7 +62,6 @@ for ($i = $start; $i < $limit && $i < $max; $i++)
       <div class="row">
     <?php endif; ?>
     <div class="col-md-<?php echo round(12 / $columnTop); ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <!-- Top -->
     <?php foreach ($item as $value)
       echo $cck->$display($value->pk, $display_params);
     ?>

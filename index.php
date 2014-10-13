@@ -59,20 +59,18 @@ endif;
         </div>
       </nav>
     <?php endif;?>
-      <div class="header">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
-              <a class="hasTooltip" href="<?php echo JUri::root(); ?>" rel="tooltip" data-original-title="<?php echo JFactory::getApplication()->getCfg('sitename'); ?>">
-                <?php echo tplTurquoiseHelper::getLogo($this); ?>
-              </a>
-            </div>
-            <div class="col-md-7">
-              <h1><?php echo $this->params->get('name'); ?></h1>
-            <?php if ($this->params->get('slogan')) : ?>
-              <p class="lead"><?php echo $this->params->get('slogan'); ?></p>
-            <?php endif; ?>
-            </div>
+      <div class="header container">
+        <div class="row">
+          <div class="col-md-2 visible-md visible-lg">
+            <a class="hasTooltip" href="<?php echo JUri::root(); ?>" rel="tooltip" data-original-title="<?php echo JFactory::getApplication()->getCfg('sitename'); ?>">
+              <?php echo tplTurquoiseHelper::getLogo($this); ?>
+            </a>
+          </div>
+          <div class="col-md-7">
+            <h1><?php echo $this->params->get('name'); ?></h1>
+          <?php if ($this->params->get('slogan')) : ?>
+            <p class="lead"><?php echo $this->params->get('slogan'); ?></p>
+          <?php endif; ?>
           </div>
         </div>
       </div>

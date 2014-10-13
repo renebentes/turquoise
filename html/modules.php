@@ -107,8 +107,8 @@ function modChrome_standard($module, &$params, &$attribs)
 
   if ($counterModules < 1) :
     $counterModules = count(JModuleHelper::getModules($attribs['name']));
-    $modules = array();
-    $modulesTab = array();
+    $modules        = array();
+    $modulesTab     = array();
   endif;
 
   $registry = new JRegistry;
@@ -151,7 +151,7 @@ function modChrome_standard($module, &$params, &$attribs)
       if ($counter <= 2) : ?>
         <li<?php echo $class; ?>>
           <a href="#module-<?php echo $renderModule->id; ?>" data-toggle="tab">
-            <?php echo !empty($class_sfx) ? '<i class="' . rtrim($class_sfx) . '"></i>' : null; ?>
+            <?php echo !empty($class_sfx) ? '<span class="' . rtrim($class_sfx) . '"></span>' : null; ?>
             <?php echo $renderModule->title; ?>
           </a>
         </li>
@@ -159,14 +159,14 @@ function modChrome_standard($module, &$params, &$attribs)
         if ($counter == 3) : ?>
           <li class="<?php echo $attribs['name'] == 'right' ? 'tab-right ' : null; ?>dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-plus"></i>
+              <span class="fa fa-plus"></span>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
         <?php endif; ?>
               <li>
                 <a href="#module-<?php echo $renderModule->id; ?>" data-toggle="tab">
-                  <?php echo !empty($class_sfx) ? '<i class="' . rtrim($class_sfx) . '"></i>' : null; ?>
+                  <?php echo !empty($class_sfx) ? '<span class="' . rtrim($class_sfx) . '"></span>' : null; ?>
                   <?php echo $renderModule->title; ?>
                 </a>
               </li>
