@@ -36,11 +36,6 @@ TODO
 * Modificar exibição de componentes e módulos Joomla!
 * Sobrescrever padrões de cores Bootstrap
 * Incluir novas posições
-  * `<position>above</position>`
-  * `<position>above_article</position>`
-  * `<position>banner</position>`
-  * `<position>bellow</position>`
-  * `<position>bellow_article</position>`
 
 Release Notes
 -------------

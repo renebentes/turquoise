@@ -47,7 +47,6 @@ abstract class tplTurquoiseHelper
   static private function _prepareHead($template)
   {
     $doc = JFactory::getDocument();
-    $doc->addScript($template->path . '/js/application.js');
 
     if ($template->params->get('load') == 'remote') :
       $doc->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
@@ -59,9 +58,10 @@ abstract class tplTurquoiseHelper
       $doc->addStylesheet($template->path . '/css/bootstrap.min.css');
       $doc->addStylesheet($template->path . '/css/font-awesome.min.css');
 
-      $doc->addScript($template->path . '/js/bootstrap.min.js');
       $doc->addScript($template->path . '/js/jquery-1.11.1.min.js');
+      $doc->addScript($template->path . '/js/bootstrap.min.js');
     endif;
+    $doc->addScript($template->path . '/js/application.js');
 
     $doc->addStylesheet($template->path . '/css/template.css');
 
@@ -116,6 +116,8 @@ abstract class tplTurquoiseHelper
     $scripts = $doc->_scripts;
     $script  = $doc->_script;
 
+    krsort($scripts);
+
     if($template->params->get('disablejs'))
     {
       unset($scripts[$template->baseurl . '/media/system/js/mootools-core.js']);
@@ -131,9 +133,17 @@ abstract class tplTurquoiseHelper
         $filejs = explode(',', $filejs);
 
         foreach ($scripts as $key => $value)
+        {
           foreach ($filejs as $file)
-            if(strpos($key, trim($file)))
+            if (strpos($key, trim($file)))
               unset($scripts[$key]);
+          if (strpos($key, 'cck.validation'))
+          {
+            $cck = $scripts[$key];
+            unset($scripts[$key]);
+            $scripts[$key] = $cck;
+          }
+        }
       }
 
       foreach ($script as $key => $value)
@@ -143,7 +153,11 @@ abstract class tplTurquoiseHelper
         }
     }
 
-    $doc->_scripts = array_reverse($scripts);
+    $doc->_scripts = $scripts;
+
+    foreach ($doc->_scripts as $key => $val) {
+      echo "$key\n";
+    }
     $doc->_script  = $script;
   }
 

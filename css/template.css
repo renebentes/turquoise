@@ -812,7 +812,7 @@ form + table {
   .header:before {
     position: absolute;
     right: 0;
-    bottom: -4px;
+    bottom: 2px;
     display: block;
     content: url("../images/header.png");
   }
