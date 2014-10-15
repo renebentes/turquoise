@@ -12,8 +12,7 @@ defined('_JEXEC') or die('Restricted access!');
 $tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' : ''; ?>
 
 <ul class="nav<?php echo $class_sfx;?>"<?php echo $tag; ?>>
-<?php
-foreach ($list as $i => &$item) :
+<?php foreach ($list as $i => &$item) :
   $class = 'item-'.$item->id;
   if ($item->id == $active_id) :
     $class .= ' current';
@@ -84,5 +83,5 @@ foreach ($list as $i => &$item) :
   else :
     echo '</li>';
   endif;
-endforeach;
-?></ul>
+endforeach; ?>
+</ul>
