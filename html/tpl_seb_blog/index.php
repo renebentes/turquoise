@@ -21,7 +21,7 @@ $items = $cck->getItems();
 $max   = count($items);
 
 // Prepare Top Items
-$numTop    = (int)$cck->getStyleParam('top_items', 1);
+$numTop    = !$cck->getStyleParam('top_items', 1) ? 1 : (int)$cck->getStyleParam('top_items', 1);
 $columnTop = !$cck->getStyleParam('top_columns', 1) ? 1 : (int) $cck->getStyleParam('top_columns');
 $limit     = $numTop;
 for ($i = 0; $i < $limit && $i < $max; $i++) :
@@ -29,14 +29,14 @@ for ($i = 0; $i < $limit && $i < $max; $i++) :
 endfor;
 
 // Prepare Middle Items
-$numMiddle    = (int)$cck->getStyleParam('middle_items', 4);
+$numMiddle    = !$cck->getStyleParam('middle_items', 4) ? 4 : (int)$cck->getStyleParam('middle_items', 4);
 $columnMiddle = !$cck->getStyleParam('middle_columns', 2) ? 1 : (int) $cck->getStyleParam('middle_columns');
 $limit        = $numTop + $numMiddle;
 for ($i = $numTop; $i < $limit && $i < $max; $i++)
   $middleItems[$i] = array_slice($items, $i, 1);
 
 // Prepare Bottom Items
-$numBottom    = (int)$cck->getStyleParam('bottom_items', 0);
+$numBottom    = !$cck->getStyleParam('bottom_items', 0) ? 0 : (int)$cck->getStyleParam('bottom_items', 0);
 $columnBottom = !$cck->getStyleParam('bottom_columns', 3) ? 1 : (int) $cck->getStyleParam('bottom_columns');
 $start        = $limit;
 $limit        = $numTop + $numMiddle + $numBottom;

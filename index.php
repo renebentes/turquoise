@@ -108,7 +108,13 @@ endif;
               <jdoc:include type="component" />
             </div>
           </div>
-          <jdoc:include type="modules" name="bellow" style="column" />
+        <?php if ($this->countModules('bellow')) : ?>
+          <div class="row">
+            <div class="col-md-12">
+              <jdoc:include type="modules" name="bellow" style="none" />
+            </div>
+          </div>
+        <?php endif; ?>
         </div>
       <?php if ($this->countModules('right')) : ?>
         <div class="col-md-3">

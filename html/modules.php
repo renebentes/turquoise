@@ -263,13 +263,11 @@ function modChrome_column($module, &$params, &$attribs)
 
   $modules[] = $temp;
 
-  if ($counterModules == 1 ) :
-    $counter = 0; ?>
+  if ($counterModules == 1 ) : ?>
     <div class="row">
     <?php foreach ($modules as $renderModule) :
-      $counter++;
       if (!empty($renderModule->content)) : ?>
-        <div class="<?php echo $renderModule->name; ?><?php echo $renderModule->params['moduleclass_sfx'] ? ' ' . htmlspecialchars($renderModule->params['moduleclass_sfx']) : 'col-md-3'; ?>">
+        <div class="<?php echo $renderModule->name; ?><?php echo $renderModule->params['moduleclass_sfx'] ? ' ' . htmlspecialchars($renderModule->params['moduleclass_sfx']) : ' col-md-3'; ?>">
         <?php if ($renderModule->showtitle != 0) : ?>
           <div class="page-header">
             <h4><?php echo $renderModule->title; ?></h4>

@@ -154,10 +154,6 @@ abstract class tplTurquoiseHelper
     }
 
     $doc->_scripts = $scripts;
-
-    foreach ($doc->_scripts as $key => $val) {
-      echo "$key\n";
-    }
     $doc->_script  = $script;
   }
 

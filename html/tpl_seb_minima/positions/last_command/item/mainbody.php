@@ -9,12 +9,10 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!'); ?>
 
-<div class="command">
 <?php if ($cck->getValue('command_photo')) : ?>
-  <img class="img-responsive hasTooltip center-block" src="<?php echo $cck->get('command_photo')->thumb2; ?>" title="<?php echo $cck->getValue('command_title'); ?>" alt="<?php echo $cck->getValue('command_title'); ?>"/>
+  <img class="img-responsive hasTooltip center-block" src="<?php echo $cck->get('command_photo')->thumb2; ?>" title="<?php echo $cck->getValue('command_title'); ?>" alt="<?php echo $cck->getValue('command_title'); ?>" />
 <?php else : ?>
   <span class="fa fa-image"></span>
 <?php endif; ?>
   <h4><?php echo str_replace($cck->getValue('command_nick'), '<strong>' . $cck->getValue('command_nick') . '</strong>', $cck->getValue('command_title')); ?></h4>
-    <p>Início de Comando: <?php echo JHtml::_('date', $cck->getValue('command_start_date'), JText::_('DATE_FORMAT_LC3')); ?></p>
-</div>
+  <p>Período de Comando: <?php echo JHtml::_('date', $cck->getValue('command_start_date'), JText::_('DATE_FORMAT_LC3')); ?> - <?php echo JHtml::_('date', $cck->getValue('command_end_date'), JText::_('DATE_FORMAT_LC3')); ?></p>
