@@ -101,20 +101,14 @@ endif;
           tplTurquoiseHelper::renderMessages();
         endif; ?>
         <?php if (tplTurquoiseHelper::isFrontpage() && $this->countModules('featured')) : ?>
-          <jdoc:include type="modules" name="featured" style="featured" />
+          <jdoc:include type="modules" name="featured" style="row" />
         <?php endif; ?>
           <div class="row">
             <div class="col-md-12">
               <jdoc:include type="component" />
             </div>
           </div>
-        <?php if ($this->countModules('bellow')) : ?>
-          <div class="row">
-            <div class="col-md-12">
-              <jdoc:include type="modules" name="bellow" style="none" />
-            </div>
-          </div>
-        <?php endif; ?>
+          <jdoc:include type="modules" name="bellow" style="row" />
         </div>
       <?php if ($this->countModules('right')) : ?>
         <div class="col-md-3">

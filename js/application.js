@@ -1,7 +1,5 @@
 if (typeof jQuery === 'undefined') throw new Error('Javascript requires jQuery!');
 
-jQuery.noConflict();
-
 !function ($) {
   $(function () {
 

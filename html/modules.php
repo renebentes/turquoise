@@ -218,13 +218,13 @@ function modChrome_standard($module, &$params, &$attribs)
 }
 
 /**
- * Module chrome for rendering the module as featured class hero-unit
+ * Module chrome for rendering the module as row
  */
-function modChrome_featured($module, &$params, &$attribs)
+function modChrome_row($module, &$params, &$attribs)
 {
   if (!empty($module->content)): ?>
-    <div class="row<?php echo htmlspecialchars($params->get('moduleclass_sfx')); ?>">
-      <div class="col-md-12">
+    <div class="row">
+      <div class="<?php echo $module->name; ?><?php echo $params->get('moduleclass_sfx') ? ' ' . htmlspecialchars($params->get('moduleclass_sfx')) : null; ?> col-md-12">
       <?php if ($module->showtitle != 0) : ?>
         <div class="page-header">
           <h1><?php echo $module->title; ?></h1>

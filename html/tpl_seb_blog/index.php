@@ -67,8 +67,9 @@ for ($i = $start; $i < $limit && $i < $max; $i++)
     ?>
     </div>
     <?php $counter++;
-    if ($counter == $columnTop || $counter == $numTop) : ?>
+    if ($row == $columnTop || $counter == $numTop) : ?>
       </div>
+      <hr class="half-rule">
     <?php endif; ?>
   <?php endforeach;
 endif; ?>
@@ -95,8 +96,9 @@ endif; ?>
     ?>
     </div>
     <?php $counter++;
-    if ($counter == $columnMiddle || $counter == $numMiddle) : ?>
+    if ($row == $columnMiddle || $counter == $numMiddle) : ?>
       </div>
+      <hr class="half-rule">
     <?php endif; ?>
   <?php endforeach;
 endif; ?>
@@ -123,8 +125,9 @@ endif; ?>
     ?>
     </div>
     <?php $counter++;
-    if ($counter == $columnBottom || $counter == $numBottom) : ?>
+    if ($row == $columnBottom || $counter == $numBottom) : ?>
       </div>
+      <hr class="half-rule">
     <?php endif; ?>
   <?php endforeach;
 endif; ?>

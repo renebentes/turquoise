@@ -18,7 +18,7 @@ if ($cck->getValue('work_gallery')) :
     <?php endif; ?>
       <div class="col-md-6">
         <div class="thumbnail">
-          <img class="img-responsive" src="<?php echo $cck->getValue('work_gallery')[$i]->thumb2; ?>" title="<?php echo $cck->getValue('work_gallery')[$i]->image_alt; ?>" alt="<?php echo $cck->getValue('work_gallery')[$i]->image_alt; ?>" />
+          <img class="img-responsive hasTooltip" src="<?php echo $cck->getValue('work_gallery')[$i]->thumb2; ?>" title="<?php echo $cck->getValue('work_gallery')[$i]->image_alt; ?>" alt="<?php echo $cck->getValue('work_gallery')[$i]->image_alt; ?>" />
           <div class="caption">
             <p><?php echo $cck->getValue('work_gallery')[$i]->image_alt; ?></p>
           </div>

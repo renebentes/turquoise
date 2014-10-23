@@ -718,8 +718,8 @@ form + table {
  * Thumbnails Styles
  */
 .thumbnails {
-  margin: 0 -10px 20px;
-  overflow: hidden;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .thumbnails-list {
@@ -728,15 +728,14 @@ form + table {
 }
 
 .thumbnails-list li {
+  position: relative;
+  min-height: 1px;
   float: left;
-  width: 25%;
-  height: 115px;
-  padding: 10px;
-  font-size: 10px;
-  line-height: 1.4;
+  width: 33.33333333%;
+  padding-left: 15px;
+  padding-right: 15px;
   text-align: center;
-  background-color: #f9f9f9;
-  border: 1px solid #fff;
+  word-wrap: break-word;
 }
 
 .command {
@@ -747,16 +746,17 @@ form + table {
   margin-right: auto;
 }
 
-.command h4 {
-  font-size: 15px;
-}
-
 .command p {
   font-size: 13px;
 }
 
+.thumbnails-list .fa,
 .command .fa {
   font-size: 10em;
+}
+
+.thumbnails-list p {
+  font-size: 12px;
 }
 
 /**
@@ -812,7 +812,7 @@ form + table {
   .header:before {
     position: absolute;
     right: 0;
-    bottom: 2px;
+    bottom: -4px;
     display: block;
     content: url("../images/header.png");
   }

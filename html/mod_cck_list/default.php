@@ -12,7 +12,6 @@ defined('_JEXEC') or die('Restricted access!');
 if ($show_list_desc == 1 && $description != '') : ?>
   <div class="well well-sm"><?php echo JHtml::_( 'content.prepare', $description ); ?></div>
 <?php endif; ?>
-<div class="cck_mod_list<?php echo $class_sfx; ?>">
 <?php if ($search->content > 0)
   echo $data;
 else
