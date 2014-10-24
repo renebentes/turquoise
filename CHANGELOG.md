@@ -4,6 +4,7 @@ CHANGELOG
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
 * 1.0.6 - 10/10/2014
+  * Added - templates personalizados para conteúdos seblod
   * Fixed - inclusão de js em helper.php
   * Added - nova posição para módulos: bellow
   * Added - reescrita tpl_seb_blog sem contemplar todos os parâmetros
