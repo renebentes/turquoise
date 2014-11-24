@@ -21,74 +21,137 @@ abstract class tplTurquoiseHelper
   /**
    * Initialize template configuration
    *
-   * @param JDocument $template The html document
+   * @param JDocument $document The html document
    *
    * @return void
    */
-  static public function init(&$template)
+  static public function init(&$document)
   {
-    $template->params    = !isset($template->params) ? JFactory::getApplication()->getTemplate(true)->params : $template->params;
-    $template->language  = !isset($template->language) ? $template->language : $template->language;
-    $template->direction = !isset($template->direction) ? $template->direction : $template->direction;
-    $template->path      = $template->baseurl . '/templates/' . $template->template;
+    $app = JFactory::getApplication();
+
+    $document->params = !isset($document->params) ? $app->getTemplate(true)->params : $document->params;
+    $document->path   = $document->baseurl . '/templates/' . $document->template;
 
     self::_setMetadata();
-    self::_prepareHead($template);
-    self::_clearDefaultJavascript($template);
+    self::_clearDefaultJavascript($document);
+    self::_prepareHead($document);
+  }
+
+  /**
+   * Defines metadata params
+   */
+  private static function _setMetadata()
+  {
+    $doc = JFactory::getDocument();
+
+    $doc->setGenerator(null);
+    $doc->setMetaData('author','Rene Bentes Pinto');
+    $doc->setMetaData('X-UA-Compatible','IE=edge,chrome=1', true);
+    $doc->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
   }
 
   /**
    * Attach elements to html head
    *
-   * @param JDocument $template The html document
+   * @param JDocument $document The html document
    *
    * @return void
    */
-  static private function _prepareHead($template)
+  static private function _prepareHead($document)
   {
     $doc = JFactory::getDocument();
 
-    if ($template->params->get('load') == 'remote') :
-      $doc->addStylesheet('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
-      $doc->addStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+    // JS
+    $doc->addScript($document->path . '/js/bootstrap.min.js');
+    $doc->addScript($document->path . '/js/application.js');
+    $doc->addScript($document->path . '/js/holder.js');
 
-      $doc->addScript('http://code.jquery.com/jquery-1.11.1.min.js');
-      $doc->addScript('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
-    else :
-      $doc->addStylesheet($template->path . '/css/bootstrap.min.css');
-      $doc->addStylesheet($template->path . '/css/font-awesome.min.css');
+    // CSS
+    $doc->addStyleSheet($document->path . '/css/template.css.php?baseurl=' . $document->baseurl . '&amp;template=' . $document->template);
+    //$doc->addStyleSheet('http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic');
 
-      $doc->addScript($template->path . '/js/jquery-1.11.1.min.js');
-      $doc->addScript($template->path . '/js/bootstrap.min.js');
-    endif;
-    $doc->addScript($template->path . '/js/application.js');
+    // Favicon & Icons
+    $doc->addFavicon($document->params->get('favicon', $document->path . '/images/ico/favicon.ico'));
 
-    $doc->addStylesheet($template->path . '/css/template.css');
+    $doc->addFavicon($document->params->get('favicon') ? $document->params->get('favicon') : $document->path . '/images/ico/favicon.ico');
 
-    $doc->addFavicon($template->params->get('favicon') ? $template->params->get('favicon') : $template->path . '/images/ico/favicon.ico');
+    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
+    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
+    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
+    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
+  }
 
-    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
-    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
-    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
-    $doc->addHeadlink($template->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
+  /**
+   * Disables loading of javascript files
+   *
+   * @param JDocument $document The html document
+   *
+   * @return void
+   */
+  static private function _clearDefaultJavascript($document)
+  {
+    $doc     = JFactory::getDocument();
+
+    $scripts = $doc->_scripts;
+    $script  = $doc->_script;
+
+    if($document->params->get('disablejs'))
+    {
+      unset($scripts[$document->baseurl . '/media/system/js/caption.js']);
+      unset($scripts[$document->baseurl . '/media/jui/js/bootstrap.min.js']);
+
+      $filejs = $document->params->get('filejs', '');
+      if (trim($filejs) !== '')
+      {
+        $filejs = explode(',', $filejs);
+
+        foreach ($scripts as $key => $value)
+        {
+          foreach ($filejs as $file)
+            if (strpos($key, trim($file)))
+              unset($scripts[$key]);
+        }
+      }
+
+      foreach ($script as $key => $value)
+        if(strpos($value, "new JCaption('img.caption');") !== false)
+        {
+          unset($script[$key]);
+          break;
+        }
+    }
+
+    $doc->_scripts = $scripts;
+    $doc->_script  = $script;
+  }
+
+  /**
+   * Get classes css for pages
+   *
+   * @return  strinf  CSS classes
+   */
+  public static function getPageClass()
+  {
+    $class = JFactory::getApplication()->getParams()->get('pageclass_sfx', '');
+    return !empty($class) ? ' class="' . $class : null;
   }
 
   /**
    * Includes site logo
    *
-   * @param JDocument $template The html document
+   * @param JDocument $document The html document
    *
    * @return string The html output
    */
-  static public function getLogo($template)
+  static public function getLogo($document)
   {
-    if ($template->params->get('logo')) :
-      $logo = $template->baseurl . '/' . $template->params->get('logo');
+    if ($document->params->get('logo')) :
+      $logo = $document->baseurl . '/' . $document->params->get('logo');
     else :
-      $logo = $template->path . '/images/logo.png';
+      $logo = $document->path . '/images/logo.png';
     endif;
 
-    $alternative = $template->params->get('alternative') ? $template->params->get('alternative') : JFactory::getApplication()->getCfg('sitename');
+    $alternative = $document->params->get('alternative') ? $document->params->get('alternative') : JFactory::getApplication()->getCfg('sitename');
 
     return '<img src="' . $logo . '" alt="' . $alternative . '" />';
   }
@@ -101,81 +164,6 @@ abstract class tplTurquoiseHelper
   static public function isFrontPage()
   {
     return JFactory::getApplication()->getMenu()->getActive() == JFactory::getApplication()->getMenu()->getDefault();
-  }
-
-  /**
-   * Disables loading of javascript files
-   *
-   * @param JDocument $template The html document
-   *
-   * @return void
-   */
-  static private function _clearDefaultJavascript($template)
-  {
-    $doc     = JFactory::getDocument();
-    $scripts = $doc->_scripts;
-    $script  = $doc->_script;
-
-    krsort($scripts);
-
-    if($template->params->get('disablejs'))
-    {
-      unset($scripts[$template->baseurl . '/media/system/js/mootools-core.js']);
-      unset($scripts[$template->baseurl . '/media/system/js/caption.js']);
-      unset($scripts[$template->baseurl . '/media/jui/js/jquery.min.js']);
-      unset($scripts[$template->baseurl . '/media/jui/js/jquery-noconflict.js']);
-      unset($scripts[$template->baseurl . '/media/jui/js/jquery-migrate.min.js']);
-      unset($scripts[$template->baseurl . '/media/jui/js/bootstrap.min.js']);
-
-      $filejs = $template->params->get('filejs', '');
-      if (trim($filejs) !== '')
-      {
-        $filejs = explode(',', $filejs);
-
-        foreach ($scripts as $key => $value)
-        {
-          foreach ($filejs as $file)
-            if (strpos($key, trim($file)))
-              unset($scripts[$key]);
-          if (strpos($key, 'cck.validation'))
-          {
-            $cck = $scripts[$key];
-            unset($scripts[$key]);
-            $scripts[$key] = $cck;
-          }
-        }
-      }
-
-      foreach ($script as $key => $value)
-        if(strpos($value, "new JCaption('img.caption');") !== false) {
-          unset($script[$key]);
-          break;
-        }
-    }
-
-    $doc->_scripts = $scripts;
-    $doc->_script  = $script;
-  }
-
-  /**
-   * Defines metadata params
-   *
-   * @param JDocument $template The html document
-   */
-  private static function _setMetadata()
-  {
-    $doc = JFactory::getDocument();
-    $doc->setGenerator(null);
-    $doc->setMetaData('author','Rene Bentes Pinto');
-    $doc->setMetaData('X-UA-Compatible','IE=edge,chrome=1', true);
-    $doc->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
-  }
-
-  public static function isNewJoomla()
-  {
-    $jversion = new JVersion;
-
-    return $jversion->isCompatible('3.0');
   }
 
   /**
@@ -235,11 +223,5 @@ abstract class tplTurquoiseHelper
         </div>
       <?php endforeach;
     endif;
-  }
-
-  public static function getPageClass()
-  {
-    $class = JFactory::getApplication()->getParams()->get('pageclass_sfx', '');
-    return !empty($class) ? ' class="' . $class : null;
   }
 }

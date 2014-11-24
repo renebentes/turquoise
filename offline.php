@@ -51,11 +51,7 @@ JFactory::getDocument()->addStyleSheet($this->path . '/css/offline.css?v=1');
       </div>
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
-        <?php if(tplTurquoiseHelper::isNewJoomla()) : ?>
-          <jdoc:include type="message" />
-        <?php else :
-          tplTurquoiseHelper::renderMessages();
-        endif; ?>
+        <?php tplTurquoiseHelper::renderMessages(); ?>
           <form action="<?php echo JRoute::_('index.php', true); ?>" method="post" name="login" role="form">
             <div class="form-group">
               <label for="username" class="sr-only"><?php echo JText::_('JGLOBAL_USERNAME'); ?></label>
@@ -87,7 +83,7 @@ JFactory::getDocument()->addStyleSheet($this->path . '/css/offline.css?v=1');
               <button class="btn btn-primary btn-lg btn-block" type="submit"><?php echo JText::_('JLOGIN'); ?></button>
               <input type="hidden" name="option" value="com_users" />
               <input type="hidden" name="task" value="user.login" />
-              <input type="hidden" name="return" value="<?php echo base64_encode(JURI::base()); ?>" />
+              <input type="hidden" name="return" value="<?php echo base64_encode(JUri::base()); ?>" />
               <?php echo JHTML::_('form.token'); ?>
             </div>
           </form>

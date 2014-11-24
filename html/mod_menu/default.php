@@ -14,9 +14,8 @@ $tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' :
 <ul class="nav<?php echo $class_sfx;?>"<?php echo $tag; ?>>
 <?php foreach ($list as $i => &$item) :
   $class = 'item-'.$item->id;
-  if ($item->id == $active_id) :
+  if (($item->id == $active_id) || ($item->type == 'alias' && $item->params->get('aliasoptions') == $active_id))
     $class .= ' current';
-  endif;
 
   if (in_array($item->id, $path)) :
     $class .= ' active';
@@ -30,12 +29,8 @@ $tag = $params->get('tag_id') != NULL ? ' id="' . $params->get('tag_id') . '"' :
   endif;
 
   if ($item->type == 'separator') :
-    if ($item->deeper && $item->parent) :
-      $item->type = 'heading';
-    else :
       $class       .= ' nav-divider';
       $item->title = '';
-    endif;
   endif;
 
   if ($item->deeper) :

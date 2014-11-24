@@ -10,7 +10,6 @@
 defined('_JEXEC') or die('Restricted access!');
 
 include_once JPATH_THEMES . '/' . $this->template . '/helper.php';
-
 tplTurquoiseHelper::init($this);
 
 // Check width of the front-end
@@ -30,13 +29,8 @@ endif;
     <jdoc:include type="head" />
 
     <!--[if lt IE 9]>
-    <?php if ($this->params->get('load') == 'remote') : ?>
-      <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
-      <script src="http://oss.maxcdn.com/respond.js/1.4.2/respond.min.js" type="text/javascript"></script>
-    <?php else : ?>
       <script src="<?php echo $this->path; ?>/js/html5shiv.min.js" type="text/javascript"></script>
       <script src="<?php echo $this->path; ?>/js/respond.min.js" type="text/javascript"></script>
-    <?php endif; ?>
     <![endif]-->
   </head>
   <body<?php echo tplTurquoiseHelper::getPageClass(); ?> role="document">
@@ -95,11 +89,7 @@ endif;
         </div>
       <?php endif; ?>
         <div class="col-md-<?php echo $col; ?>">
-        <?php if(tplTurquoiseHelper::isNewJoomla()) : ?>
-          <jdoc:include type="message" />
-        <?php else :
-          tplTurquoiseHelper::renderMessages();
-        endif; ?>
+        <?php tplTurquoiseHelper::renderMessages(); ?>
         <?php if (tplTurquoiseHelper::isFrontpage() && $this->countModules('featured')) : ?>
           <jdoc:include type="modules" name="featured" style="row" />
         <?php endif; ?>

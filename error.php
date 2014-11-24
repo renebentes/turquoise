@@ -38,32 +38,25 @@ endif;
 <head>
   <?php echo $doc->getBuffer('head', 'head'); ?>
   <!--[if lt IE 9]>
-  <?php if ($this->params->get('load') == 'remote') : ?>
-    <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.min.js" type="text/javascript"></script>
-    <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" type="text/javascript"></script>
-  <?php else : ?>
     <script src="<?php echo $this->path; ?>/js/html5shiv.min.js" type="text/javascript"></script>
     <script src="<?php echo $this->path; ?>/js/respond.min.js" type="text/javascript"></script>
-  <?php endif; ?>
   <![endif]-->
   </head>
   <body>
     <a href="#content" class="sr-only">Skip to content</a>
     <header class="wrap-header">
-      <div class="header">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
-              <a class="hasTooltip" href="<?php echo JUri::root(); ?>" rel="tooltip" data-original-title="<?php echo $app->getCfg('sitename'); ?>">
-                <?php echo tplTurquoiseHelper::getLogo($this); ?>
-              </a>
-            </div>
-            <div class="col-md-7">
-              <h1><?php echo $this->params->get('name'); ?></h1>
-            <?php if ($this->params->get('slogan')) : ?>
-              <p class="lead"><?php echo $this->params->get('slogan'); ?></p>
-            <?php endif; ?>
-            </div>
+      <div class="header container">
+        <div class="row">
+          <div class="col-md-2 visible-md visible-lg">
+            <a class="hasTooltip" href="<?php echo JUri::root(); ?>" rel="tooltip" data-original-title="<?php echo $app->getCfg('sitename'); ?>">
+              <?php echo tplTurquoiseHelper::getLogo($this); ?>
+            </a>
+          </div>
+          <div class="col-md-7">
+            <h1><?php echo $this->params->get('name'); ?></h1>
+          <?php if ($this->params->get('slogan')) : ?>
+            <p class="lead"><?php echo $this->params->get('slogan'); ?></p>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -78,25 +71,26 @@ endif;
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
           <?php $module = JModuleHelper::getModule('search');
-          if(isset($module->position)) {
+          if(isset($module->position))
+          {
             $module->position = $module->position == 'search' ? 'error' : $module->position;
             echo JModuleHelper::renderModule($module);
           } ?>
 
           <ul class="nav nav-pills nav-justified">
             <li><a href="<?php echo JUri::root(); ?>"><i class="glyphicon glyphicon-home"></i> <?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></li>
-            <li><a href="mailto:webmaster@8bec.eb.mil.br"><i class="glyphicon glyphicon-envelope"></i> <?php echo JText::_('TPL_TURQUOISE_ERROR_LAYOUT_CONTACT_WEBMASTER'); ?></a></li>
+            <li><a href="mailto:<?php echo $app->getCfg('mailfrom'); ?>"><i class="glyphicon glyphicon-envelope"></i> <?php echo JText::_('TPL_TURQUOISE_ERROR_LAYOUT_CONTACT_WEBMASTER'); ?></a></li>
           </ul>
         </div>
       </div>
     </main>
   <?php if ($doc->countModules('footermenu') || $doc->countModules('footer') || $doc->countModules('copyright')) : ?>
     <footer class="wrap-footer">
+    <?php if ($doc->countModules('footer')) : ?>
       <div class="container">
-      <?php if ($doc->countModules('footer')) : ?>
         <?php echo $doc->getBuffer('modules', 'footer', array('name' => 'footer', 'style' => 'column')); ?>
-      <?php endif; ?>
       </div>
+    <?php endif; ?>
     <?php if ($doc->countModules('copyright')) : ?>
       <div class="footer-bottom">
         <div class="container">

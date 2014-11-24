@@ -10,18 +10,21 @@
 defined('_JEXEC') or die('Restricted access!');
 
 // -- Initialize
-require_once dirname(__FILE__) . '/config.php';
+require_once JPATH_THEMES . '/seb_blog/config.php';
 
 $cck = CCK_Rendering::getInstance($this->template);
 if ($cck->initialize() === false)
   return;
+
+// Fix path to overrides
+$cck->path = JPATH_THEMES . '/seb_blog';
 
 // Params init
 $items = $cck->getItems();
 $max   = count($items);
 
 // Prepare Top Items
-$numTop    = $cck->getStyleParam('top_items') == '' ? $max : (int)$cck->getStyleParam('top_items');
+$numTop    = $cck->getStyleParam('top_items') == '' ? 1 : (int)$cck->getStyleParam('top_items');
 $columnTop = !$cck->getStyleParam('top_columns', 1) ? 1 : (int) $cck->getStyleParam('top_columns');
 $limit     = $numTop;
 for ($i = 0; $i < $limit && $i < $max; $i++) :

@@ -3,6 +3,13 @@ CHANGELOG
 
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
+* 1.0.7 - 24/11/2014
+  * Added - holder.js
+  * Updated - Bootstrap 3.3.1
+  * Added - LESS
+  * Fixed - posições para override seblod
+  * Removed - Parâmetro para escolha de carregamento de bibliotecas
+  * Removed - Retrocompatibilidade Joomla 2.5
 * 1.0.6 - 10/10/2014
   * Added - templates personalizados para conteúdos seblod
   * Fixed - inclusão de js em helper.php

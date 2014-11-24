@@ -10,11 +10,14 @@
 defined('_JEXEC') or die('Restricted access!');
 
 // -- Initialize
-require_once dirname(__FILE__) . '/config.php';
+require_once JPATH_THEMES . '/seb_list/config.php';
 
 $cck = CCK_Rendering::getInstance($this->template);
 if ($cck->initialize() === false)
   return;
+
+// Fix path to overrides
+$cck->path = JPATH_THEMES . '/seb_list';
 
 // -- Prepare
 $class        = trim($cck->getStyleParam('class', '')) != '' ? ' class="' . trim($cck->getStyleParam('class', '')) . '"' : '';

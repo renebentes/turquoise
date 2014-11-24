@@ -28,24 +28,15 @@ endif;
     <jdoc:include type="head" />
 
     <!--[if lt IE 9]>
-    <?php if ($this->params->get('load') == 'remote') : ?>
-      <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.min.js" type="text/javascript"></script>
-      <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" type="text/javascript"></script>
-    <?php else : ?>
       <script src="<?php echo $this->path; ?>/js/html5shiv.min.js" type="text/javascript"></script>
       <script src="<?php echo $this->path; ?>/js/respond.min.js" type="text/javascript"></script>
-    <?php endif; ?>
     <![endif]-->
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-        <?php if(tplTurquoiseHelper::isNewJoomla()) : ?>
-          <jdoc:include type="message" />
-        <?php else :
-          tplTurquoiseHelper::renderMessages();
-        endif; ?>
+        <?php tplTurquoiseHelper::renderMessages(); ?>
           <jdoc:include type="component" />
         </div>
       </div>
