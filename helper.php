@@ -67,12 +67,9 @@ abstract class tplTurquoiseHelper
     $doc->addScript($document->path . '/js/holder.js');
 
     // CSS
-    $doc->addStyleSheet($document->path . '/css/template.css.php?baseurl=' . $document->baseurl . '&amp;template=' . $document->template);
-    //$doc->addStyleSheet('http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic');
+    $doc->addStyleSheet($document->path . '/css/template.css.php?baseurl=' . $document->baseurl . '&template=' . $document->template);
 
     // Favicon & Icons
-    $doc->addFavicon($document->params->get('favicon', $document->path . '/images/ico/favicon.ico'));
-
     $doc->addFavicon($document->params->get('favicon') ? $document->params->get('favicon') : $document->path . '/images/ico/favicon.ico');
 
     $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
@@ -90,17 +87,18 @@ abstract class tplTurquoiseHelper
    */
   static private function _clearDefaultJavascript($document)
   {
-    $doc     = JFactory::getDocument();
+    $doc = JFactory::getDocument();
 
     $scripts = $doc->_scripts;
     $script  = $doc->_script;
 
     if($document->params->get('disablejs'))
     {
+      $filejs = $document->params->get('filejs', '');
+
       unset($scripts[$document->baseurl . '/media/system/js/caption.js']);
       unset($scripts[$document->baseurl . '/media/jui/js/bootstrap.min.js']);
 
-      $filejs = $document->params->get('filejs', '');
       if (trim($filejs) !== '')
       {
         $filejs = explode(',', $filejs);
@@ -132,8 +130,12 @@ abstract class tplTurquoiseHelper
    */
   public static function getPageClass()
   {
-    $class = JFactory::getApplication()->getParams()->get('pageclass_sfx', '');
-    return !empty($class) ? ' class="' . $class : null;
+    $app       = JFactory::getApplication();
+    $menu      = $app->getMenu();
+    $active    = $menu->getActive();
+    $alias     = isset($active->alias) ? ' ' . $active->alias : '';
+    $pageClass = $app->getParams()->get('pageclass_sfx', '') ? ' ' . $app->getParams()->get('pageclass_sfx', '') : '';
+    return ' class="' . ($active == $menu->getDefault() ? 'front' : 'site' . $alias . $pageClass) . '"';
   }
 
   /**

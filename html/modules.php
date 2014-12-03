@@ -52,8 +52,8 @@ function modChrome_navbar($module, &$params, &$attribs)
         break;
       case 'navbar-default' :
       case 'navbar-inverse' :
-      case 'navbar-blue' :
-      case 'navbar-blue-transparent' :
+      case 'navbar-turquoise' :
+      case 'navbar-dark' :
       case 'navbar-static-top' :
       case 'navbar-fixed-top' :
       case 'navbar-fixed' :

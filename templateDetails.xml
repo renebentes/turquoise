@@ -8,7 +8,7 @@
   <authorUrl></authorUrl>
   <copyright>Copyright (C) 2014 Rene Bentes Pinto, Inc. All rights reserved.</copyright>
   <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <description>TPL_TURQUOISE_XML_DESCRIPTION</description>
   <files>
     <folder>css</folder>
@@ -67,10 +67,6 @@
         </field>
       </fieldset>
       <fieldset name="advanced">
-        <field name="load" type="radio" deafult="remote" label="TPL_TURQUOISE_PARAMETER_LOAD_LABEL" description="TPL_TURQUOISE_PARAMETER_LOAD_DESC">
-          <option value="remote">TPL_TURQUOISE_PARAMETER_LOAD_VALUE_REMOTE</option>
-          <option value="local">TPL_TURQUOISE_PARAMETER_LOAD_VALUE_LOCAL</option>
-        </field>
         <field name="disablejs" type="radio" default="1" label="TPL_TURQUOISE_PARAMETER_DISABLEJS_LABEL" description="TPL_TURQUOISE_PARAMETER_DISABLEJS_DESC">
           <option value="0">JNO</option>
           <option value="1">JYES</option>

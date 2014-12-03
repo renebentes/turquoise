@@ -19,7 +19,6 @@ else
 if ($show_more_link != '') : ?>
   <a<?php echo $show_more_class; ?> href="<?php echo $show_more_link; ?>"><?php echo JText::_( 'MOD_CCK_LIST_VIEW_ALL' ); ?></a>
 <?php endif; ?>
-</div>
 <?php if ($show_list_desc == 2 && $description != '') : ?>
   <div class="well well-sm"><?php echo JHtml::_( 'content.prepare', $description ); ?></div>
 <?php endif; ?>

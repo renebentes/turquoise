@@ -44,7 +44,7 @@ function compress($buffer) {
 require_once 'less.php/Less.php';
 $parser = new Less_Parser();
 $parser->parseFile($path . '/template.less', $baseurl . '/');
-$parser->parse('@icon-font-path: "' . $baseurl . '/templates/' . $template . '/fonts/";'); // glypicon path correction
+$parser->parse('@base-path: "' . $baseurl . '/templates/' . $template . '";');
 echo $parser->getCss();
 
 ?>

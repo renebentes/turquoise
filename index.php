@@ -37,7 +37,7 @@ endif;
     <a href="#content" class="sr-only">Skip to content</a>
     <header class="wrap-header">
     <?php if ($this->countModules('topmenu') || $this->countModules('login') || $this->countModules('search')) : ?>
-      <nav class="navbar navbar-blue-transparent navbar-sm" role="navigation">
+      <nav class="navbar navbar-dark navbar-sm" role="navigation">
         <div class="container">
         <?php if ($this->countModules('topmenu')) : ?>
           <jdoc:include type="modules" name="topmenu" style="none" />

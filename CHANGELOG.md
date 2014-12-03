@@ -4,6 +4,7 @@ CHANGELOG
 Este arquivo refere-se às mudanças realizadas desde a versão inicial de desenvolvimento.
 
 * 1.0.7 - 24/11/2014
+  * Fixed - Caminhos para fontes
   * Added - holder.js
   * Updated - Bootstrap 3.3.1
   * Added - LESS
