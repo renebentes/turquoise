@@ -13,9 +13,9 @@ $params = $displayData->params;
 $images = json_decode($displayData->images);
 ?>
 
-<?php if (isset($images->image_intro) && !empty($images->image_intro)) : ?>
-<?php $imgfloat = empty($images->float_intro) ? $params->get('float_intro') : $images->float_intro; ?>
-  <figure class="thumbnail<?php echo $imgfloat != 'none' ? ' col-md-5 pull-' . htmlspecialchars($imgfloat) : ' col-md-6 col-md-offset-3'; ?>">
+<?php if (isset($images->image_intro) && !empty($images->image_intro)) :
+  $imgfloat = empty($images->float_intro) ? $params->get('float_intro') : $images->float_intro; ?>
+  <figure class="thumbnail col-md-<?php echo htmlspecialchars($imgfloat) != 'none' ? '5 pull-' . htmlspecialchars($imgfloat) : '6 col-md-offset-3'; ?>">
     <img class="img-responsive" src="<?php echo htmlspecialchars($images->image_intro); ?>"<?php echo $images->image_intro_caption ? ' title="' . htmlspecialchars($images->image_intro_caption) . '"' : null; ?> alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>"/>
   <?php if ($images->image_intro_caption) : ?>
     <figcaption class="caption"><?php echo htmlspecialchars($images->image_intro_caption); ?></ficaption>

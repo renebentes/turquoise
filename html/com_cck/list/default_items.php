@@ -32,7 +32,7 @@ if (count($this->items) && $location)
 	JCck::callFunc_Array('plgCCK_Storage_Location' . $location, 'onCCK_Storage_LocationPrepareList', array(&$params));
 	$path	=	JPATH_PLUGINS . '/cck_storage_location/' . $location . '/tmpl/item.php';
 
-	foreach ( $this->items as $item )
+	foreach ($this->items as $item)
 		include $path;
 }
 else

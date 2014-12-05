@@ -33,19 +33,20 @@ $showIcons  = $params->get('show_print_icon') || $params->get('show_email_icon')
   </aside>
 <?php endif; ?>
 
-<?php echo JLayoutHelper::render('joomla.content.intro_image', $this->item); ?>
-
 <?php if (!$params->get('show_intro')) : ?>
   <?php echo $this->item->event->afterDisplayTitle; ?>
 <?php endif; ?>
 
-<?php echo $this->item->event->beforeDisplayContent; ?>
 <?php if (isset($images->image_intro) && !empty($images->image_intro) && $imgfloat != 'none') : ?>
-  <div class="col-md-7">
+  <div class="row">
+    <?php echo JLayoutHelper::render('joomla.content.intro_image', $this->item); ?>
+
+    <div class="col-md-7">
 <?php endif; ?>
     <?php echo $this->item->introtext; ?>
 <?php if (isset($images->image_intro) && !empty($images->image_intro) && $imgfloat != 'none') : ?>
   </div>
+</div>
 <?php endif; ?>
 
 <?php if ($useDefList && ($info == 1 || $info == 2)) : ?>
