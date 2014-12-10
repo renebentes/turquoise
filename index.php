@@ -21,6 +21,7 @@ else :
   $col = 12;
 endif;
 
+tplTurquoiseHelper::clearDefaultScripts($this);
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +127,7 @@ endif;
     <?php endif; ?>
     </footer>
   <?php endif; ?>
-    <a href="#" class="btn btn-primary btn-lg scroll-top" role="button"><i class="glyphicon glyphicon-chevron-up"></i></a>
+    <a href="#" class="btn btn-default scroll-top" role="button"><i class="glyphicon glyphicon-chevron-up"></i></a>
     <jdoc:include type="modules" name="debug" />
   </body>
 </html>

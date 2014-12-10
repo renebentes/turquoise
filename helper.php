@@ -25,7 +25,7 @@ abstract class tplTurquoiseHelper
    *
    * @return void
    */
-  static public function init(&$document)
+  public static function init(&$document)
   {
     $app = JFactory::getApplication();
 
@@ -33,7 +33,6 @@ abstract class tplTurquoiseHelper
     $document->path   = $document->baseurl . '/templates/' . $document->template;
 
     self::_setMetadata();
-    self::_clearDefaultJavascript($document);
     self::_prepareHead($document);
   }
 
@@ -57,11 +56,14 @@ abstract class tplTurquoiseHelper
    *
    * @return void
    */
-  static private function _prepareHead($document)
+  private static function _prepareHead($document)
   {
     $doc = JFactory::getDocument();
 
     // JS
+    $doc->addScript($document->baseurl . '/media/jui/js/jquery.min.js');
+    $doc->addScript($document->baseurl . '/media/jui/js/jquery-noconflict.js');
+    $doc->addScript($document->baseurl . '/media/jui/js/jquery-migrate.min.js');
     $doc->addScript($document->path . '/js/bootstrap.min.js');
     $doc->addScript($document->path . '/js/application.js');
     $doc->addScript($document->path . '/js/holder.js');
@@ -85,12 +87,10 @@ abstract class tplTurquoiseHelper
    *
    * @return void
    */
-  static private function _clearDefaultJavascript($document)
+  public static function clearDefaultScripts($document)
   {
-    $doc = JFactory::getDocument();
-
-    $scripts = $doc->_scripts;
-    $script  = $doc->_script;
+    $scripts = $document->_scripts;
+    $script  = $document->_script;
 
     if($document->params->get('disablejs'))
     {
@@ -119,8 +119,8 @@ abstract class tplTurquoiseHelper
         }
     }
 
-    $doc->_scripts = $scripts;
-    $doc->_script  = $script;
+    $document->_scripts = $scripts;
+    $document->_script  = $script;
   }
 
   /**
@@ -145,7 +145,7 @@ abstract class tplTurquoiseHelper
    *
    * @return string The html output
    */
-  static public function getLogo($document)
+  public static function getLogo($document)
   {
     if ($document->params->get('logo')) :
       $logo = $document->baseurl . '/' . $document->params->get('logo');
@@ -163,7 +163,7 @@ abstract class tplTurquoiseHelper
    *
    * @return boolean True for the front page
    */
-  static public function isFrontPage()
+  public static function isFrontPage()
   {
     return JFactory::getApplication()->getMenu()->getActive() == JFactory::getApplication()->getMenu()->getDefault();
   }

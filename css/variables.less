@@ -19,7 +19,7 @@
  */
 @navbar-dark-link-color          : #eee;
 @navbar-dark-link-hover-color    : #fff;
-@navbar-dark-link-hover-bg       : #289;
+@navbar-dark-link-hover-bg       : transparent;
 @navbar-dark-link-active-color   : #fff;
 @navbar-dark-link-active-bg      : darken(@navbar-dark-bg, 6.5%);
 @navbar-dark-link-disabled-color : #ddd;
@@ -53,7 +53,7 @@
  */
 @navbar-turquoise-link-color          : #fff;
 @navbar-turquoise-link-hover-color    : #eee;
-@navbar-turquoise-link-hover-bg       : #289;
+@navbar-turquoise-link-hover-bg       : transparent;
 @navbar-turquoise-link-active-color   : #eee;
 @navbar-turquoise-link-active-bg      : darken(@navbar-turquoise-bg, 6.5%);
 @navbar-turquoise-link-disabled-color : #ddd;
@@ -72,3 +72,9 @@
 @navbar-turquoise-toggle-hover-bg     : @navbar-turquoise-link-hover-bg;
 @navbar-turquoise-toggle-icon-bar-bg  : #888;
 @navbar-turquoise-toggle-border-color : #fff;
+
+/**
+ * Navbar Sizes
+ */
+@navbar-height-small: (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
+@navbar-margin-bottom-small: 0px;

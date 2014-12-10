@@ -55,7 +55,7 @@ hr {
   margin-bottom: 0;
   padding: 0;
   background: #08c;
-  box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+  .box-shadow(0 3px 7px rgba(0,0,0,.2));
 
   &:before {
     position: absolute;
@@ -365,6 +365,7 @@ hr {
 
   .navbar-link {
     color: @navbar-turquoise-link-color;
+
     &:hover {
       color: @navbar-turquoise-link-hover-color;
     }
@@ -376,6 +377,7 @@ hr {
     &:focus {
       color: @navbar-turquoise-link-hover-color;
     }
+
     &[disabled],
     fieldset[disabled] & {
       &:hover,
@@ -390,5 +392,255 @@ hr {
  * Navbar Small
  */
 .navbar-sm {
-  .navbar-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+  .navbar-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @navbar-height-small; @navbar-margin-bottom-small);
+}
+
+/**
+ * Dropdown's Forms
+ */
+.dropdown-menu {
+  form {
+    padding: 5px 10px;
+    min-width: 230px;
+    color: #333;
+
+    a {
+      &,
+      &:hover,
+      &:focus {
+        color: #333;
+      }
+    }
+  }
+}
+
+/**
+ * Page Header Styles
+ */
+.page-header {
+  margin: 20px 0 10px 0;
+  padding-bottom: 0;
+
+  &:after {
+    bottom: 0;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: -1px;
+    width: 60px;
+    height: 3px;
+    background-color: #08c;
+    content: "";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.well {
+  .page-header {
+    margin: 0 0 5px 0;
+  }
+}
+
+/**
+ * Carousel Styles
+ */
+.carousel-indicators {
+  bottom: 0;
+  margin-bottom: 0;
+}
+
+.carousel-caption {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #333;
+  background: rgba(0,0,0, .3);
+
+  a {
+    color: #fff;
+  }
+}
+
+/**
+ * Pagination Styles
+ */
+.page-counter {
+  margin: 20px 0;
+  padding: 6px 12px;
+}
+
+.panel {
+  .page-counter {
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .pagination {
+    margin: 0;
+  }
+}
+
+/**
+ * Modal Styles
+ */
+.modal-header {
+  position: relative;
+
+  .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+/**
+ * Footer Styles
+ */
+.wrap-footer {
+  position: relative;
+  margin-top: 0;
+  padding: 0;
+  background: #303030;
+  .box-shadow(0 3px 7px rgba(0,0,0,.2));
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    overflow: hidden;
+    padding: 10px 0 0 0;
+    border-top: 1px solid #444;
+    background-color: #3a3a3a;
+    background-color: rgba(0,0,0,.3);
+    font-size: 13px;
+
+    address,
+    ul {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.scroll-top {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+/**
+ * Nav Styles
+ */
+.nav {
+  .nav {
+    > li > a {
+      padding-left: 30px;
+    }
+
+    .nav {
+      > li > a {
+        padding-left: 45px;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  .nav {
+    > li > a {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      color: #333;
+      text-shadow: none;
+    }
+  }
+}
+
+/**
+ * Typography
+ */
+form > br + .form-group {
+  margin-top: 15px;
+}
+
+.article-details {
+  margin: 0;
+  padding: 1px 5px;
+  width: 90%;
+
+  > dd {
+    display: inline-block;
+
+    + dd:before {
+      padding: 0 3px;
+      color: #333;
+      content: "|";
+    }
+  }
+}
+
+.tags > a {
+  margin-right: 5px;
+}
+
+figure,
+img {
+  &.pull-left + p {
+    margin-right: 10px;
+  }
+
+  &.pull-right + p {
+    margin-left: 10px;
+  }
+}
+
+.blog-featured,
+.blog,
+.article {
+  margin-bottom: 20px;
+
+  article aside {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+  }
+}
+
+.readmore {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+
+  a {
+    &:before {
+      content: "";
+      width: 0;
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 2px;
+      background: #08c;
+      -webkit-transition: .2s;
+           -o-transition: .2s;
+              transition: .2s;
+    }
+  }
 }
