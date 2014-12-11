@@ -34,6 +34,7 @@ abstract class tplTurquoiseHelper
 
     self::_setMetadata();
     self::_prepareHead($document);
+    self::_clearDefaultScripts($document);
   }
 
   /**
@@ -87,7 +88,7 @@ abstract class tplTurquoiseHelper
    *
    * @return void
    */
-  public static function clearDefaultScripts($document)
+  private static function _clearDefaultScripts($document)
   {
     $scripts = $document->_scripts;
     $script  = $document->_script;

@@ -21,7 +21,6 @@ else :
   $col = 12;
 endif;
 
-tplTurquoiseHelper::clearDefaultScripts($this);
 ?>
 
 <!DOCTYPE html>
