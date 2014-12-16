@@ -16,11 +16,6 @@ $cck = CCK_Rendering::getInstance($this->template);
 if ($cck->initialize() === false)
   return;
 
-$doc = JFactory::getDocument();
-echo '<pre>';
-print_r($doc);
-echo '</pre>';
-
 // Fix path to overrides
 $cck->path = JPATH_THEMES . '/seb_minima';
 

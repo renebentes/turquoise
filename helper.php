@@ -34,7 +34,7 @@ abstract class tplTurquoiseHelper
 
     self::_setMetadata();
     self::_prepareHead($document);
-    self::_clearDefaultScripts($document);
+    self::_clearDefaultScripts($document->params);
   }
 
   /**
@@ -62,10 +62,7 @@ abstract class tplTurquoiseHelper
     $doc = JFactory::getDocument();
 
     // JS
-    $doc->addScript($document->baseurl . '/media/jui/js/jquery.min.js');
-    $doc->addScript($document->baseurl . '/media/jui/js/jquery-noconflict.js');
-    $doc->addScript($document->baseurl . '/media/jui/js/jquery-migrate.min.js');
-    $doc->addScript($document->path . '/js/bootstrap.min.js');
+    JHtml::_('bootstrap.framework');
     $doc->addScript($document->path . '/js/application.js');
     $doc->addScript($document->path . '/js/holder.js');
 
@@ -73,32 +70,41 @@ abstract class tplTurquoiseHelper
     $doc->addStyleSheet($document->path . '/css/template.css.php?baseurl=' . $document->baseurl . '&template=' . $document->template);
 
     // Favicon & Icons
-    $doc->addFavicon($document->params->get('favicon') ? $document->params->get('favicon') : $document->path . '/images/ico/favicon.ico');
+    $favicon  = $document->params->get('favicon') ? $document->baseurl . '/' . $document->params->get('favicon') : $document->path . '/images/ico/favicon.ico';
+    $iconpath = substr($favicon, 0, strrpos($favicon, '/'));
+    $doc->addFavicon($favicon);
 
-    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-144-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '144x144'));
-    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-114-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '114x114'));
-    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-72-precomposed.png', 'apple-touch-icon-precomposed', 'rel', array('sizes' => '72x72'));
-    $doc->addHeadlink($document->path . '/images/ico/apple-touch-icon-57-precomposed.png', 'apple-touch-icon-precomposed', 'rel');
+    $icons = array(
+      'icon-144' => array('sizes' => '144x144'),
+      'icon-114' => array('sizes' => '114x114'),
+      'icon-72' => array('sizes' => '72x72'),
+      'icon-57' => array()
+    );
+
+    foreach ($icons as $key => $value)
+      $doc->addHeadlink($iconpath . '/apple-touch-' . $key . '-precomposed.png', 'apple-touch-icon-precomposed', 'rel', $value);
   }
 
   /**
    * Disables loading of javascript files
    *
-   * @param JDocument $document The html document
+   * @param Array $params The template params
    *
    * @return void
    */
-  private static function _clearDefaultScripts($document)
+  private static function _clearDefaultScripts($params)
   {
-    $scripts = $document->_scripts;
-    $script  = $document->_script;
+    $doc     = JFactory::getDocument();
+    $scripts = $doc->_scripts;
+    $script  = $doc->_script;
 
-    if($document->params->get('disablejs'))
+    if($params['disablejs'])
     {
-      $filejs = $document->params->get('filejs', '');
+      $filejs = $params['filejs'];
 
-      unset($scripts[$document->baseurl . '/media/system/js/caption.js']);
-      unset($scripts[$document->baseurl . '/media/jui/js/bootstrap.min.js']);
+      unset($scripts[JUri::base(true) . '/media/system/js/mootools-core.js']);
+      unset($scripts[JUri::base(true) . '/media/system/js/mootools-more.js']);
+      unset($scripts[JUri::base(true) . '/media/system/js/caption.js']);
 
       if (trim($filejs) !== '')
       {
@@ -120,8 +126,8 @@ abstract class tplTurquoiseHelper
         }
     }
 
-    $document->_scripts = $scripts;
-    $document->_script  = $script;
+    $doc->_scripts = $scripts;
+    $doc->_script  = $script;
   }
 
   /**
