@@ -25,7 +25,7 @@ $showIcons  = $params->get('show_print_icon') || $params->get('show_email_icon')
 
 <section class="article<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="http://schema.org/Article">
 <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? JFactory::getConfig()->get('language') : $this->item->language; ?>" />
-<?php if ($this->params->get('show_page_heading')) : ?>
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
   <div class="page-header">
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
   </div>
@@ -36,7 +36,7 @@ endif; ?>
   <article>
   <?php echo JLayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item); ?>
 
-  <?php if (($useDefList && ($info == 0 || $info == 2)) || ($this->print || !$this->print)) : ?>
+  <?php if (($useDefList && ($info == 0 || $info == 2)) && ($this->print || !$this->print)) : ?>
     <aside class="clearfix">
     <?php if (!$this->print) :
       if ($showIcons) :

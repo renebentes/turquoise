@@ -9,6 +9,9 @@
 // No direct access.
 defined('_JEXEC') or die('Restricted access!');
 
+$this->data = trim(str_replace(array('<!-- Begin: SEBLOD 3.x Document { www.seblod.com } -->', '<!-- End: SEBLOD 3.x (App Builder & CCK for Joomla!) { www.seblod.com } -->'), '', $this->data));
+$this->form = trim(str_replace(array('<!-- Begin: SEBLOD 3.x Document { www.seblod.com } -->', '<!-- End: SEBLOD 3.x (App Builder & CCK for Joomla!) { www.seblod.com } -->'), '', $this->form));
+
 $js = array();
 if ((JCck::getConfig_Param('validation', 2) > 1) && $this->config['validation'] != '')
 {
@@ -35,7 +38,7 @@ $app = JFactory::getApplication();
         return false;
       }
     }
-    jQuery("#seblod_form").append('<input type="hidden" id="return" name="return" value="<?php echo base64_encode(JFactory::getURI()); ?>">');
+    jQuery("#seblod_form").append('<input type="hidden" id="return" name="return" value="<?php echo base64_encode(JFactory::getUri()); ?>">');
     Joomla.submitform(task,document.getElementById('seblod_form'));
   }
 </script>

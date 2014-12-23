@@ -16,6 +16,7 @@ $canEdit    = $this->item->params->get('access-edit');
 $info       = $this->item->params->get('info_block_position', 0);
 $useDefList = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date') || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author');
 $showIcons  = $params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit;
+$imgfloat   = empty($images->float_intro) ? $params->get('float_intro') : $images->float_intro;
 ?>
 
 <article>

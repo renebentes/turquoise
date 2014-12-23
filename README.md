@@ -6,7 +6,7 @@ Layout de site baseado em Twitter Bootstrap e Font Awesome.
 Requirements
 ------------
 
-* [Joomla! 2.5+](http://www.joomla.org)
+* [Joomla! 3.0+](http://www.joomla.org)
 * [Twitter Bootstrap](http://www.getbootstrap.com)
 * [jQuery](http://www.jquery.com)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
